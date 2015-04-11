@@ -14,7 +14,8 @@ namespace CarbonCopy_UnitTests
             {
                 Name = "localVariable",
                 Type = "System.String",
-                Value = "test"
+                Value = "test",
+                IsClass = true
             };
 
             var replicator = new Replicator();
@@ -39,6 +40,30 @@ namespace CarbonCopy_UnitTests
             var result = replicator.GenerateDeclaration(replicationObject);
 
             Assert.AreEqual("Dim localVariable As System.Decimal = 12.35", result);
+        }
+
+        [TestMethod]
+        public void GetClass()
+        {
+            
+            ReplicationObject replicationObject = new ReplicationObject()
+            {
+                Name = "a",
+                Type = "System.Decimal",
+                Value = "12,35"
+            };
+
+            var replicator = new Replicator();
+
+            var result = replicator.GenerateDeclaration(replicationObject);
+
+            Assert.AreEqual("Dim localVariable As System.Decimal = 12.35", result);
+        }
+
+        private class A
+        {
+            public string s = "s1";
+            public decimal d = 12.456M;
         }
     }
 }

@@ -9,18 +9,18 @@ namespace Zinc.CarbonCopy.Replication.Declaration
 {
     class DeclarationFactory
     {
-        //private Debugger _debugger;
-
-        //public DeclarationFactory(Debugger Debugger)
-        //{
-        //    _debugger = Debugger;
-        //}
-
-        static public IDeclaration MakeDeclaration(ReplicationObject replicationObject)
+        static public Declaration CreateDeclaration(ReplicationObject replicationObject)
         {
-            if (replicationObject.Type.Equals("System.String"))
+            if (replicationObject.IsClass)
             {
-                return new StringDeclaration(replicationObject);
+                if (replicationObject.Type.Equals("System.String"))
+                {
+                    return new StringDeclaration(replicationObject);
+                }
+
+                return new ClassDeclaration(replicationObject);
+
+                throw new NotImplementedException();
             }
 
             return new SimpleDeclaration(replicationObject);

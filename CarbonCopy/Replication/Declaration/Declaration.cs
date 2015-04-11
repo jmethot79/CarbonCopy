@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace Zinc.CarbonCopy.Replication.Declaration
 {
-    abstract class DeclarationBase
+    abstract class Declaration
     {
         private ReplicationObject _expressionObject;
 
-        public DeclarationBase(ReplicationObject expressionObject)
+        public Declaration(ReplicationObject expressionObject)
         {
             _expressionObject = expressionObject;
         }
+
         protected ReplicationObject ExpressionObject
         {
             get { return _expressionObject; }
         }
+
+        public abstract override string ToString();
     }
 }

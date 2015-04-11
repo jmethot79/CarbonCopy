@@ -8,7 +8,6 @@ namespace Zinc.CarbonCopy.Replication.Declaration
 {
     interface IDeclaration
     {
-        string GetType();         //TODO: requis
         string GetDeclaration();
     }
 }

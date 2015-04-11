@@ -11,5 +11,6 @@ namespace Zinc.CarbonCopy.Replication
         public string Name;
         public string Type;
         public string Value;
+        public bool IsClass;
     }
 }

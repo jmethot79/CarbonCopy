@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace Zinc.CarbonCopy.Replication.Declaration
 {
-    class StringDeclaration : DeclarationBase, IDeclaration
+    class StringDeclaration : Declaration
     {
         public StringDeclaration(ReplicationObject expressionObject) : base(expressionObject) { }
 
-        public new string GetType()
-        {
-            return ExpressionObject.Type;
-        }
-
-        public string GetDeclaration()
+        public override string ToString()
         {
             return String.Concat(ExpressionObject.Type, " = ", "\"", ExpressionObject.Value, "\"");
         }

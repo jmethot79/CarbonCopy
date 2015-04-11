@@ -84,9 +84,9 @@ namespace Zinc.CarbonCopy
 
             var dteInstance = (DTE)GetService(typeof(SDTE));
 
-            var ro = new RemplirReplicationObjets(dteInstance.Debugger);
+            var replicationObjectProvider = new ReplicationObjetProvider(dteInstance.Debugger);
 
-            Replication.ReplicationObject replicationObject = ro.GetReplicationObject(variableName);
+            Replication.ReplicationObject replicationObject = replicationObjectProvider.CreateReplicationObject(variableName);
 
             var replicator = new Replication.Replicator();
 
