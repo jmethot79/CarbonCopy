@@ -80,27 +80,25 @@ namespace Zinc.CarbonCopy
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            DTE dteInstance = (DTE)GetService(typeof(SDTE));
-            EnvDTE.Debugger debugger = dteInstance.Debugger;
-
-            RemplirReplicationObjets ro = new RemplirReplicationObjets(debugger);
-
             string variableName = GetSelectedVariable();
+
+            var dteInstance = (DTE)GetService(typeof(SDTE));
+
+            var ro = new RemplirReplicationObjets(dteInstance.Debugger);
 
             Replication.ReplicationObject replicationObject = ro.GetReplicationObject(variableName);
 
-            Replication.Replicator replicator = new Replication.Replicator();
+            var replicator = new Replication.Replicator();
 
             string declaration = replicator.GenerateDeclaration(replicationObject);
         }
 
-
         private string GetSelectedVariable()
         {
-            DTE dteInstance = (DTE)GetService(typeof(SDTE));
-            EnvDTE.TextDocument td = (EnvDTE.TextDocument)dteInstance.ActiveDocument.Object("");
+            var dteInstance = (DTE)GetService(typeof(SDTE));
+            var textDocument = (EnvDTE.TextDocument)dteInstance.ActiveDocument.Object("");
 
-            return td.Selection.Text;
+            return textDocument.Selection.Text;
         }
     }
 }
