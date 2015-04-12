@@ -127,7 +127,6 @@
     <Compile Include="Replication\Declaration\ClassDeclaration.cs" />
     <Compile Include="Replication\Declaration\Declaration.cs" />
     <Compile Include="Replication\Declaration\DeclarationFactory.cs" />
-    <Compile Include="Replication\Declaration\IDeclaration.cs" />
     <Compile Include="Replication\Declaration\SimpleDeclaration.cs" />
     <Compile Include="Replication\Declaration\StringDeclaration.cs" />
     <Compile Include="Replication\ReplicationObject.cs" />

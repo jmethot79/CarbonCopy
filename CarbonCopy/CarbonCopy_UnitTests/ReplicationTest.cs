@@ -48,16 +48,35 @@ namespace CarbonCopy_UnitTests
             
             ReplicationObject replicationObject = new ReplicationObject()
             {
-                Name = "a",
-                Type = "System.Decimal",
-                Value = "12,35"
+                Name = "aClass",
+                Type = "ConsoleApplication1.Program+A",
+                Value = "{ConsoleApplication1.Program.A}",
+                IsClass = true
             };
+
+            replicationObject.Properties = new System.Collections.Generic.List<ReplicationObject>();
+
+            replicationObject.Properties.Add(new ReplicationObject()
+            {
+                Name = "s",
+                Type = "System.String",
+                Value = "s1",
+                IsClass = false
+            });
+
+            replicationObject.Properties.Add(new ReplicationObject()
+            {
+                Name = "d",
+                Type = "System.Decimal",
+                Value = "12.45M",
+                IsClass = true
+            });
 
             var replicator = new Replicator();
 
             var result = replicator.GenerateDeclaration(replicationObject);
 
-            Assert.AreEqual("Dim localVariable As System.Decimal = 12.35", result);
+            //Assert.AreEqual("Dim localVariable As System.Decimal = 12.35", result);
         }
 
         private class A
