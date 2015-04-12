@@ -123,14 +123,14 @@
   <ItemGroup>
     <Compile Include="Guids.cs" />
     <Compile Include="InvalidExpressionException.cs" />
-    <Compile Include="ReplicationObjetProvider.cs" />
-    <Compile Include="Replication\Declaration\ArrayDeclaration.cs" />
-    <Compile Include="Replication\Declaration\ClassDeclaration.cs" />
-    <Compile Include="Replication\Declaration\Declaration.cs" />
-    <Compile Include="Replication\Declaration\DeclarationFactory.cs" />
-    <Compile Include="Replication\Declaration\SimpleDeclaration.cs" />
-    <Compile Include="Replication\Declaration\StringDeclaration.cs" />
-    <Compile Include="Replication\ReplicationObject.cs" />
+    <Compile Include="ReplicateProvider.cs" />
+    <Compile Include="Replication\ArrayReplicate.cs" />
+    <Compile Include="Replication\ClassReplicate.cs" />
+    <Compile Include="Replication\ReplicateFactory.cs" />
+    <Compile Include="Replication\SimpleReplicate.cs" />
+    <Compile Include="Replication\StringReplicate.cs" />
+    <Compile Include="Replication\ObjectProperties.cs" />
+    <Compile Include="Replication\Replicate.cs" />
     <Compile Include="Replication\Replicator.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

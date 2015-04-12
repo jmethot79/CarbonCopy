@@ -1,32 +1,44 @@
 ﻿using System;
 
-namespace Zinc.CarbonCopy.Replication.Declaration
+namespace Zinc.CarbonCopy.Replication
 {
-    class DeclarationFactory
+    class ReplicateFactory
     {
-        static public Declaration CreateDeclaration(ReplicationObject replicationObject)
+        static public Replicate CreateReplicate(ObjectProperties properties)
         {
-            if (replicationObject.IsClass)
+            if (properties.IsClass)
             {
-                if (replicationObject.Type.Equals("System.String"))
-                {
-                    return new StringDeclaration(replicationObject);
-                }
+                if (properties.IsString) { return new StringReplicate(); };
 
-                //   If typeObjet.BaseType.Name = "Array" Then
-                //      Return New ArrayDeclarationObjet(objet)
-                //   End If
-                if (replicationObject.IsArray)
-                {
-                    return new ArrayDeclaration(replicationObject);
-                }
+                if (properties.IsArray) { return new ArrayReplicate(); };
 
-                return new ClassDeclaration(replicationObject);
-
-                throw new NotImplementedException();
+                return new ClassReplicate();
             }
 
-            return new SimpleDeclaration(replicationObject);
+            return new SimpleReplicate();
+
+            //throw new NotImplementedException();
+            //if (Replicate.IsClass)
+            //{
+            //    if (Replicate.Type.Equals("System.String"))
+            //    {
+            //        return new StringDeclaration();
+            //    }
+
+            //    //   If typeObjet.BaseType.Name = "Array" Then
+            //    //      Return New ArrayDeclarationObjet(objet)
+            //    //   End If
+            //    if (Replicate.IsArray)
+            //    {
+            //        return new ArrayDeclaration(Replicate);
+            //    }
+
+            //    return new ClassDeclaration(Replicate);
+
+            //    throw new NotImplementedException();
+            //}
+
+            //return new SimpleDeclaration(Replicate);
             
 
             //if (_debugger.GetExpression())

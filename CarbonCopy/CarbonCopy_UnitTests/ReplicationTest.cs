@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zinc.CarbonCopy.Replication;
 
@@ -10,7 +10,7 @@ namespace CarbonCopy_UnitTests
         [TestMethod]
         public void GetString()
         {
-            ReplicationObject replicationObject = new ReplicationObject()
+            Replicate Replicate = new StringReplicate()
             {
                 Name = "localVariable",
                 Type = "System.String",
@@ -20,7 +20,7 @@ namespace CarbonCopy_UnitTests
 
             var replicator = new Replicator();
 
-            var result = replicator.GenerateDeclaration(replicationObject);
+            var result = replicator.GenerateDeclaration(Replicate);
 
             Assert.AreEqual("Dim localVariable As System.String = \"test\"", result);
         }
@@ -28,7 +28,7 @@ namespace CarbonCopy_UnitTests
         [TestMethod]
         public void GetDecimal()
         {
-            ReplicationObject replicationObject = new ReplicationObject()
+            Replicate Replicate = new SimpleReplicate()
             {
                 Name = "localVariable",
                 Type = "System.Decimal",
@@ -37,7 +37,7 @@ namespace CarbonCopy_UnitTests
 
             var replicator = new Replicator();
 
-            var result = replicator.GenerateDeclaration(replicationObject);
+            var result = replicator.GenerateDeclaration(Replicate);
 
             Assert.AreEqual("Dim localVariable As System.Decimal = 12.35", result);
         }
@@ -46,7 +46,7 @@ namespace CarbonCopy_UnitTests
         public void GetClass()
         {
             
-            ReplicationObject replicationObject = new ReplicationObject()
+            Replicate Replicate = new ClassReplicate()
             {
                 Name = "aClass",
                 Type = "ConsoleApplication1.Program.A",
@@ -55,9 +55,9 @@ namespace CarbonCopy_UnitTests
                 ConstructorParametersCount = 0
             };
 
-            replicationObject.Properties = new System.Collections.Generic.List<ReplicationObject>();
+            Replicate.Properties = new System.Collections.Generic.List<Replicate>();
 
-            replicationObject.Properties.Add(new ReplicationObject()
+            Replicate.Properties.Add(new StringReplicate()
             {
                 Name = "s",
                 Type = "System.String",
@@ -65,7 +65,7 @@ namespace CarbonCopy_UnitTests
                 IsClass = true
             });
 
-            replicationObject.Properties.Add(new ReplicationObject()
+            Replicate.Properties.Add(new SimpleReplicate()
             {
                 Name = "d",
                 Type = "System.Decimal",
@@ -75,7 +75,7 @@ namespace CarbonCopy_UnitTests
 
             var replicator = new Replicator();
 
-            var result = replicator.GenerateDeclaration(replicationObject);
+            var result = replicator.GenerateDeclaration(Replicate);
 
             Assert.AreEqual(1941479115, result.GetHashCode());
         }
@@ -84,7 +84,7 @@ namespace CarbonCopy_UnitTests
         public void GetClassWithConstructor()
         {
 
-            ReplicationObject replicationObject = new ReplicationObject()
+            Replicate Replicate = new ClassReplicate()
             {
                 Name = "aClass",
                 Type = "ConsoleApplication1.Program.A",
@@ -93,9 +93,9 @@ namespace CarbonCopy_UnitTests
                 ConstructorParametersCount = 1
             };
 
-            replicationObject.Properties = new System.Collections.Generic.List<ReplicationObject>();
+            Replicate.Properties = new System.Collections.Generic.List<Replicate>();
 
-            replicationObject.Properties.Add(new ReplicationObject()
+            Replicate.Properties.Add(new StringReplicate()
             {
                 Name = "s",
                 Type = "System.String",
@@ -103,7 +103,7 @@ namespace CarbonCopy_UnitTests
                 IsClass = true
             });
 
-            replicationObject.Properties.Add(new ReplicationObject()
+            Replicate.Properties.Add(new SimpleReplicate()
             {
                 Name = "d",
                 Type = "System.Decimal",
@@ -113,7 +113,7 @@ namespace CarbonCopy_UnitTests
 
             var replicator = new Replicator();
 
-            var result = replicator.GenerateDeclaration(replicationObject);
+            var result = replicator.GenerateDeclaration(Replicate);
 
             Assert.AreEqual(1714081736, result.GetHashCode());
         }
@@ -122,7 +122,7 @@ namespace CarbonCopy_UnitTests
         public void GetClassWithConstructors()
         {
 
-            ReplicationObject replicationObject = new ReplicationObject()
+            Replicate Replicate = new ClassReplicate()
             {
                 Name = "aClass",
                 Type = "ConsoleApplication1.Program.A",
@@ -131,9 +131,9 @@ namespace CarbonCopy_UnitTests
                 ConstructorParametersCount = 2
             };
 
-            replicationObject.Properties = new System.Collections.Generic.List<ReplicationObject>();
+            Replicate.Properties = new System.Collections.Generic.List<Replicate>();
 
-            replicationObject.Properties.Add(new ReplicationObject()
+            Replicate.Properties.Add(new StringReplicate()
             {
                 Name = "s",
                 Type = "System.String",
@@ -141,7 +141,7 @@ namespace CarbonCopy_UnitTests
                 IsClass = true
             });
 
-            replicationObject.Properties.Add(new ReplicationObject()
+            Replicate.Properties.Add(new SimpleReplicate()
             {
                 Name = "d",
                 Type = "System.Decimal",
@@ -151,7 +151,7 @@ namespace CarbonCopy_UnitTests
 
             var replicator = new Replicator();
 
-            var result = replicator.GenerateDeclaration(replicationObject);
+            var result = replicator.GenerateDeclaration(Replicate);
 
             Assert.AreEqual(535008086, result.GetHashCode());
         }

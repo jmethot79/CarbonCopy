@@ -1,15 +1,12 @@
 ﻿using System;
-using Zinc.CarbonCopy.Replication.Declaration;
 
 namespace Zinc.CarbonCopy.Replication
 {
     class Replicator
     {
-        public string GenerateDeclaration(ReplicationObject replicationObject)
+        public string GenerateDeclaration(Replicate replicate)
         {
-            var declaration = DeclarationFactory.CreateDeclaration(replicationObject);
-
-            return String.Concat("Dim ", replicationObject.Name, " As ", declaration);
+            return String.Concat("Dim ", replicate.Name, " As ", replicate.Declaration);
         }
     }
 }

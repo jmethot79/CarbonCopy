@@ -84,13 +84,13 @@ namespace Zinc.CarbonCopy
 
             var dteInstance = (DTE)GetService(typeof(SDTE));
 
-            var replicationObjectProvider = new ReplicationObjetProvider(dteInstance.Debugger);
+            var ReplicateProvider = new ReplicateProvider(dteInstance.Debugger);
 
-            var replicationObject = replicationObjectProvider.CreateReplicationObject(variableName);
+            var Replicate = ReplicateProvider.CreateReplicate(variableName);
 
             var replicator = new Replication.Replicator();
 
-            string declaration = replicator.GenerateDeclaration(replicationObject);
+            string declaration = replicator.GenerateDeclaration(Replicate);
         }
 
         private string GetSelectedVariable()

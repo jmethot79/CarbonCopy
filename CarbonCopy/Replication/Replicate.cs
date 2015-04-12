@@ -2,7 +2,7 @@
 
 namespace Zinc.CarbonCopy.Replication
 {
-    class ReplicationObject
+    abstract class Replicate
     {
         public string Name;
         public string Type;
@@ -10,6 +10,9 @@ namespace Zinc.CarbonCopy.Replication
         public bool IsClass;
         public bool IsArray;
         public int ConstructorParametersCount;
-        public List<ReplicationObject> Properties;
+        public List<Replicate> Properties;
+
+        public abstract string Declaration { get; }
+
     }
 }
