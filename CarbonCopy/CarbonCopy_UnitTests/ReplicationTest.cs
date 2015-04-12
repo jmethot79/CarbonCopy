@@ -51,7 +51,8 @@ namespace CarbonCopy_UnitTests
                 Name = "aClass",
                 Type = "ConsoleApplication1.Program.A",
                 Value = "{ConsoleApplication1.Program.A}",
-                IsClass = true
+                IsClass = true,
+                ConstructorParametersCount = 0
             };
 
             replicationObject.Properties = new System.Collections.Generic.List<ReplicationObject>();
@@ -79,10 +80,42 @@ namespace CarbonCopy_UnitTests
             Assert.AreEqual(1921771820, result.GetHashCode());
         }
 
-        //private class A
-        //{
-        //    public string s = "s1";
-        //    public decimal d = 12.456M;
-        //}
+        [TestMethod]
+        public void GetClassWithConstructor()
+        {
+
+            ReplicationObject replicationObject = new ReplicationObject()
+            {
+                Name = "aClass",
+                Type = "ConsoleApplication1.Program.A",
+                Value = "{ConsoleApplication1.Program.A}",
+                IsClass = true,
+                ConstructorParametersCount = 2
+            };
+
+            replicationObject.Properties = new System.Collections.Generic.List<ReplicationObject>();
+
+            replicationObject.Properties.Add(new ReplicationObject()
+            {
+                Name = "s",
+                Type = "System.String",
+                Value = "s1",
+                IsClass = true
+            });
+
+            replicationObject.Properties.Add(new ReplicationObject()
+            {
+                Name = "d",
+                Type = "System.Decimal",
+                Value = "12.45M",
+                IsClass = false
+            });
+
+            var replicator = new Replicator();
+
+            var result = replicator.GenerateDeclaration(replicationObject);
+
+            Assert.AreEqual(596119069, result.GetHashCode());
+        }
     }
 }
