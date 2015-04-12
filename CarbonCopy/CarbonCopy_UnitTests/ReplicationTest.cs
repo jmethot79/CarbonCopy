@@ -115,7 +115,7 @@ namespace CarbonCopy_UnitTests
 
             var result = replicator.GenerateDeclaration(replicationObject);
 
-            Assert.AreEqual(857352686, result.GetHashCode());
+            Assert.AreEqual(1714081736, result.GetHashCode());
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace CarbonCopy_UnitTests
 
             var result = replicator.GenerateDeclaration(replicationObject);
 
-            Assert.AreEqual(596119069, result.GetHashCode());
+            Assert.AreEqual(535008086, result.GetHashCode());
         }
     }
 }

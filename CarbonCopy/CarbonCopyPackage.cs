@@ -97,8 +97,16 @@ namespace Zinc.CarbonCopy
         {
             var dteInstance = (DTE)GetService(typeof(SDTE));
             var textDocument = (EnvDTE.TextDocument)dteInstance.ActiveDocument.Object("");
+            var selectedVariable = textDocument.Selection.Text;
 
-            return textDocument.Selection.Text;
+            EnvDTE.Expression expression = dteInstance.Debugger.GetExpression(selectedVariable);
+
+            if (!expression.IsValidValue)
+            {
+                throw new InvalidExpressionException(selectedVariable);
+            }
+
+            return selectedVariable;
         }
     }
 }

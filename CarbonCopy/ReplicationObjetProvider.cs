@@ -16,18 +16,13 @@ namespace Zinc.CarbonCopy
 
         public ReplicationObject CreateReplicationObject(string variableName)
         {
-            EnvDTE.Expression expression = _debugger.GetExpression(variableName);
-
-            if (!expression.IsValidValue)
-            {
-                throw new InvalidExpressionException(variableName);
-            }
-
             //var Name = expression.Name;
             //var Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty);
             //var Value = expression.Value.Replace("\"", String.Empty);
             //var IsClass = _debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty);
-            
+
+            EnvDTE.Expression expression = _debugger.GetExpression(variableName);
+
             ReplicationObject replicationObject = new ReplicationObject()
             {
                 Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1),
