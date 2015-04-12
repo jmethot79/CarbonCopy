@@ -13,6 +13,14 @@ namespace Zinc.CarbonCopy.Replication.Declaration
                     return new StringDeclaration(replicationObject);
                 }
 
+                //   If typeObjet.BaseType.Name = "Array" Then
+                //      Return New ArrayDeclarationObjet(objet)
+                //   End If
+                if (replicationObject.IsArray)
+                {
+                    return new ArrayDeclaration(replicationObject);
+                }
+
                 return new ClassDeclaration(replicationObject);
 
                 throw new NotImplementedException();

@@ -124,6 +124,7 @@
     <Compile Include="Guids.cs" />
     <Compile Include="InvalidExpressionException.cs" />
     <Compile Include="ReplicationObjetProvider.cs" />
+    <Compile Include="Replication\Declaration\ArrayDeclaration.cs" />
     <Compile Include="Replication\Declaration\ClassDeclaration.cs" />
     <Compile Include="Replication\Declaration\Declaration.cs" />
     <Compile Include="Replication\Declaration\DeclarationFactory.cs" />

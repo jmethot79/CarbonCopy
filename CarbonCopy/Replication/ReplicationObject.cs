@@ -8,6 +8,7 @@ namespace Zinc.CarbonCopy.Replication
         public string Type;
         public string Value;
         public bool IsClass;
+        public bool IsArray;
         public int ConstructorParametersCount;
         public List<ReplicationObject> Properties;
     }
