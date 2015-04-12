@@ -86,7 +86,7 @@ namespace Zinc.CarbonCopy
 
             var replicationObjectProvider = new ReplicationObjetProvider(dteInstance.Debugger);
 
-            Replication.ReplicationObject replicationObject = replicationObjectProvider.CreateReplicationObject(variableName);
+            var replicationObject = replicationObjectProvider.CreateReplicationObject(variableName);
 
             var replicator = new Replication.Replicator();
 

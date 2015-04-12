@@ -4,16 +4,16 @@ namespace Zinc.CarbonCopy.Replication.Declaration
 {
     abstract class Declaration
     {
-        private ReplicationObject _expressionObject;
+        private ReplicationObject _replicationObject;
 
-        public Declaration(ReplicationObject expressionObject)
+        public Declaration(ReplicationObject replicationObject)
         {
-            _expressionObject = expressionObject;
+            _replicationObject = replicationObject;
         }
 
-        protected ReplicationObject ExpressionObject
+        protected ReplicationObject ReplicationObject
         {
-            get { return _expressionObject; }
+            get { return _replicationObject; }
         }
 
         public abstract override string ToString();

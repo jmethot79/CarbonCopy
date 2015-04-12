@@ -8,7 +8,7 @@ namespace Zinc.CarbonCopy.Replication.Declaration
 
         public override string ToString()
         {
-            return String.Concat(ExpressionObject.Type, " = ", ExpressionObject.Value).Replace(",", ".");
+            return String.Concat(ReplicationObject.Type, " = ", ReplicationObject.Value).Replace(",", ".");
         }
     }
 }

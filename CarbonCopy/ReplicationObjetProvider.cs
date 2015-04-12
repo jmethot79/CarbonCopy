@@ -32,7 +32,7 @@ namespace Zinc.CarbonCopy
             ReplicationObject replicationObject = new ReplicationObject()
             {
                 Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1),
-                Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty),
+                Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+","."),
                 Value = expression.Value.Replace("\"", String.Empty),
                 IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty))
             };

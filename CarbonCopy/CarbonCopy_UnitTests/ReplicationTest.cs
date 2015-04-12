@@ -49,7 +49,7 @@ namespace CarbonCopy_UnitTests
             ReplicationObject replicationObject = new ReplicationObject()
             {
                 Name = "aClass",
-                Type = "ConsoleApplication1.Program+A",
+                Type = "ConsoleApplication1.Program.A",
                 Value = "{ConsoleApplication1.Program.A}",
                 IsClass = true
             };
@@ -61,7 +61,7 @@ namespace CarbonCopy_UnitTests
                 Name = "s",
                 Type = "System.String",
                 Value = "s1",
-                IsClass = false
+                IsClass = true
             });
 
             replicationObject.Properties.Add(new ReplicationObject()
@@ -69,20 +69,20 @@ namespace CarbonCopy_UnitTests
                 Name = "d",
                 Type = "System.Decimal",
                 Value = "12.45M",
-                IsClass = true
+                IsClass = false
             });
 
             var replicator = new Replicator();
 
             var result = replicator.GenerateDeclaration(replicationObject);
 
-            //Assert.AreEqual("Dim localVariable As System.Decimal = 12.35", result);
+            Assert.AreEqual(1921771820, result.GetHashCode());
         }
 
-        private class A
-        {
-            public string s = "s1";
-            public decimal d = 12.456M;
-        }
+        //private class A
+        //{
+        //    public string s = "s1";
+        //    public decimal d = 12.456M;
+        //}
     }
 }
