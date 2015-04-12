@@ -23,12 +23,11 @@ namespace Zinc.CarbonCopy
                 throw new InvalidExpressionException(variableName);
             }
 
-            var Name = expression.Name;
-            var Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty);
-            var Value = expression.Value.Replace("\"", String.Empty);
-            var IsClass = _debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty);
+            //var Name = expression.Name;
+            //var Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty);
+            //var Value = expression.Value.Replace("\"", String.Empty);
+            //var IsClass = _debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty);
             
-
             ReplicationObject replicationObject = new ReplicationObject()
             {
                 Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1),

@@ -13,21 +13,34 @@ namespace Zinc.CarbonCopy.Replication.Declaration
 
             stringBuilder.Append(String.Concat("New ", ReplicationObject.Type));
 
-            if (ReplicationObject.ConstructorParametersCount > 0)
+            var constructorDeclaration = GetConstructorDeclaration();
+            stringBuilder.Append(String.Concat("(", constructorDeclaration, ")"));
+
+            var propertiesDeclaration = GetPropertiesDeclaration();
+            stringBuilder.Append(propertiesDeclaration); 
+      
+            return stringBuilder.ToString();
+        }
+
+        private string GetConstructorDeclaration()
+        {
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 1; i <= ReplicationObject.ConstructorParametersCount; i++)
             {
-                var constructorStringBuilder = new StringBuilder();
-
-                for (int i = 1; i <= ReplicationObject.ConstructorParametersCount; i++)
+                if (stringBuilder.Length > 0)
                 {
-                    if (constructorStringBuilder.Length > 0)
-                    {
-                        constructorStringBuilder.Append(", ");
-                    }
-                    constructorStringBuilder.Append("Nothing");
+                    stringBuilder.Append(", ");
                 }
-
-                stringBuilder.Append(String.Concat(" (", constructorStringBuilder.ToString(), ")"));
+                stringBuilder.Append("Nothing");
             }
+
+            return stringBuilder.ToString();
+        }
+
+        private string GetPropertiesDeclaration()
+        {
+            var stringBuilder = new StringBuilder();
 
             if (ReplicationObject.Properties != null)
             {
@@ -49,7 +62,7 @@ namespace Zinc.CarbonCopy.Replication.Declaration
                 stringBuilder.Append(propertyStringBuilder.ToString());
                 stringBuilder.Append("}");
             }
-      
+
             return stringBuilder.ToString();
         }
     }

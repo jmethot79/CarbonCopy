@@ -77,11 +77,49 @@ namespace CarbonCopy_UnitTests
 
             var result = replicator.GenerateDeclaration(replicationObject);
 
-            Assert.AreEqual(1921771820, result.GetHashCode());
+            Assert.AreEqual(1941479115, result.GetHashCode());
         }
 
         [TestMethod]
         public void GetClassWithConstructor()
+        {
+
+            ReplicationObject replicationObject = new ReplicationObject()
+            {
+                Name = "aClass",
+                Type = "ConsoleApplication1.Program.A",
+                Value = "{ConsoleApplication1.Program.A}",
+                IsClass = true,
+                ConstructorParametersCount = 1
+            };
+
+            replicationObject.Properties = new System.Collections.Generic.List<ReplicationObject>();
+
+            replicationObject.Properties.Add(new ReplicationObject()
+            {
+                Name = "s",
+                Type = "System.String",
+                Value = "s1",
+                IsClass = true
+            });
+
+            replicationObject.Properties.Add(new ReplicationObject()
+            {
+                Name = "d",
+                Type = "System.Decimal",
+                Value = "12.45M",
+                IsClass = false
+            });
+
+            var replicator = new Replicator();
+
+            var result = replicator.GenerateDeclaration(replicationObject);
+
+            Assert.AreEqual(857352686, result.GetHashCode());
+        }
+
+        [TestMethod]
+        public void GetClassWithConstructors()
         {
 
             ReplicationObject replicationObject = new ReplicationObject()
