@@ -12,7 +12,7 @@ namespace Zinc.CarbonCopy.Replication
         {
             get
             {
-                return String.Concat(Type, " = ", "\"", Value, "\"");
+                return String.Concat("\"", Value, "\"");
             }
         }
     }

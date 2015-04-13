@@ -18,9 +18,18 @@ namespace Zinc.CarbonCopy
         {
             EnvDTE.Expression expression = _debugger.GetExpression(variableName);
 
-            var properties = new ObjectProperties() 
+            //var IsArray = _debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty);
+            //    var IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty));
+            //    var IsCollection = false;
+            //    var IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String");
+                var IsArray = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty).Equals("Array").ToString().ToLower());
+                var IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty));
+                var IsCollection = false;
+                var IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String");
+ 
+             var properties = new ObjectProperties() 
             {
-                IsArray = false,
+                IsArray = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty).Equals("Array").ToString().ToLower()),
                 IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty)),
                 IsCollection = false,
                 IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String")
@@ -29,16 +38,51 @@ namespace Zinc.CarbonCopy
             Replicate replicate = ReplicateFactory.CreateReplicate(properties);
             
             replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
-            replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+",".");
+            replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".");
             replicate.Value = expression.Value.Replace("\"", String.Empty);
-            replicate.IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty));
-            
-            if (replicate.IsClass)
+           
+            if (properties.IsClass)
             {
-                replicate.Properties = GetProperties(variableName);
+                if (properties.IsArray) 
+                {
+                    replicate.Properties = GetElements(variableName);
+                }
+                else
+                {
+                    replicate.Properties = GetProperties(variableName);
+                }
+                
             }
 
             return replicate;
+        }
+
+        private List<Replicate> GetElements(string expression)
+        {
+            var members = new List<Replicate>();
+
+            EnvDTE.Expression expression2 = _debugger.GetExpression(expression);
+
+            foreach (EnvDTE.Expression dataMember in expression2.DataMembers)
+            {
+                var value = _debugger.GetExpression(String.Concat(expression, dataMember.Name)).Value;
+
+                //todo: FIND Better
+                if (value != "Nothing")
+                {
+                    var name = _debugger.GetExpression(String.Concat(expression, dataMember.Name)).Name;
+                    var property = CreateReplicate(name);
+
+                    members.Add(property);
+                }
+            }
+
+            if (members.Count == 0)
+            {
+                members = null;
+            }
+
+            return members;
         }
 
         private List<Replicate> GetProperties(string expression)

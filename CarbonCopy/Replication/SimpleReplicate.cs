@@ -8,7 +8,7 @@ namespace Zinc.CarbonCopy.Replication
         {
             get 
             {
-                return String.Concat(Type, " = ", Value).Replace(",", ".");
+                return Value.Replace(",", ".");
             }
         }
     }

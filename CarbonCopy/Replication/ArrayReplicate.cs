@@ -14,8 +14,24 @@ namespace Zinc.CarbonCopy.Replication
             {
                 var stringBuilder = new StringBuilder();
 
-                stringBuilder.Append(String.Concat("New ", Type));
+                if (Properties.Count > 0)
+                {
+                    stringBuilder.Append(" {");
 
+                    var propertiesStringBuilder = new StringBuilder();
+                    foreach(Replicate arrayMember in Properties)
+                    {
+                        if (propertiesStringBuilder.Length > 0)
+                        {
+                            propertiesStringBuilder.AppendLine(",");
+                        }
+                        propertiesStringBuilder.Append(arrayMember.Declaration);  
+                    }
+
+                    stringBuilder.Append(propertiesStringBuilder.ToString());
+                    stringBuilder.Append("}");
+                }
+                
                 return stringBuilder.ToString();
             }
         }

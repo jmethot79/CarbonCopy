@@ -14,7 +14,7 @@ namespace Zinc.CarbonCopy.Replication
                 stringBuilder.Append(String.Concat("New ", Type));
 
                 var constructorDeclaration = GetConstructorDeclaration();
-                stringBuilder.Append(String.Concat("(", constructorDeclaration, ")"));
+                stringBuilder.Append(String.Concat("(", constructorDeclaration, ") "));
 
                 var propertiesDeclaration = GetPropertiesDeclaration();
                 stringBuilder.Append(propertiesDeclaration);
@@ -54,10 +54,10 @@ namespace Zinc.CarbonCopy.Replication
                         propertyStringBuilder.AppendLine(",");
                     }
 
-                    propertyStringBuilder.Append(String.Concat(property.Name, " = ", property.Declaration));
+                    propertyStringBuilder.Append(String.Concat(".", property.Name, " = ", property.Declaration));
                 }
 
-                stringBuilder.AppendLine(" {");
+                stringBuilder.AppendLine("With {");
                 stringBuilder.Append(propertyStringBuilder.ToString());
                 stringBuilder.Append("}");
             }
