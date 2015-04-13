@@ -16,7 +16,7 @@ namespace Zinc.CarbonCopy.Replication
 
                 if (Properties.Count > 0)
                 {
-                    stringBuilder.Append(" {");
+                    stringBuilder.Append("{");
 
                     var propertiesStringBuilder = new StringBuilder();
                     foreach(Replicate arrayMember in Properties)

@@ -18,12 +18,15 @@ namespace Zinc.CarbonCopy
         {
             EnvDTE.Expression expression = _debugger.GetExpression(variableName);
 
+            //TODO: gérer si propriete volontairement settée à nothing, mais constructeur initialise, il faut garder nothing.
+            if (expression.Value != "Nothing")
+            { 
             //var IsArray = _debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty);
             //    var IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty));
             //    var IsCollection = false;
             //    var IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String");
-                var IsArray = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty).Equals("Array").ToString().ToLower());
-                var IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty));
+                var IsArray = _debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty).Equals("Array").ToString().ToLower();
+                var IsClass = _debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty);
                 var IsCollection = false;
                 var IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String");
  
@@ -38,7 +41,7 @@ namespace Zinc.CarbonCopy
             Replicate replicate = ReplicateFactory.CreateReplicate(properties);
             
             replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
-            replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".");
+            replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]","()");
             replicate.Value = expression.Value.Replace("\"", String.Empty);
            
             if (properties.IsClass)
@@ -54,7 +57,11 @@ namespace Zinc.CarbonCopy
                 
             }
 
+
             return replicate;
+            }
+            return null;
+
         }
 
         private List<Replicate> GetElements(string expression)
@@ -95,7 +102,10 @@ namespace Zinc.CarbonCopy
             {
                 var property = CreateReplicate(String.Concat(expression, ".", dataMember.Name));
 
-                properties.Add(property);
+                if (property != null)
+                {
+                    properties.Add(property);
+                } 
             }
 
             if (properties.Count == 0)
