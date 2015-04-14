@@ -21,47 +21,41 @@ namespace Zinc.CarbonCopy
             //TODO: gérer si propriete volontairement settée à nothing, mais constructeur initialise, il faut garder nothing.
             if (expression.Value != "Nothing")
             { 
-            //var IsArray = _debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty);
-            //    var IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty));
-            //    var IsCollection = false;
-            //    var IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String");
                 var IsArray = _debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty).Equals("Array").ToString().ToLower();
                 var IsClass = _debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty);
                 var IsCollection = false;
                 var IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String");
  
-             var properties = new ObjectProperties() 
-            {
-                IsArray = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty).Equals("Array").ToString().ToLower()),
-                IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty)),
-                IsCollection = false,
-                IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String")
-            };
+                var properties = new ObjectProperties() 
+                {
+                    IsArray = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value.Replace("\"", String.Empty).Equals("Array").ToString().ToLower()),
+                    IsClass = Boolean.Parse(_debugger.GetExpression(String.Concat(variableName, ".GetType().IsClass")).Value.Replace("\"", String.Empty)),
+                    IsCollection = false,
+                    IsString = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Equals("System.String")
+                };
 
-            Replicate replicate = ReplicateFactory.CreateReplicate(properties);
+                Replicate replicate = ReplicateFactory.CreateReplicate(properties);
             
-            replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
-            replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]","()");
-            replicate.Value = expression.Value.Replace("\"", String.Empty);
+                replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
+                replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]","()");
+                replicate.Value = expression.Value.Replace("\"", String.Empty);
            
-            if (properties.IsClass)
-            {
-                if (properties.IsArray) 
+                if (properties.IsClass)
                 {
-                    replicate.Properties = GetElements(variableName);
+                    if (properties.IsArray) 
+                    {
+                        replicate.Properties = GetElements(variableName);
+                    }
+                    else
+                    {
+                        replicate.Properties = GetProperties(variableName);
+                    }
                 }
-                else
-                {
-                    replicate.Properties = GetProperties(variableName);
-                }
-                
+
+                return replicate;
             }
 
-
-            return replicate;
-            }
             return null;
-
         }
 
         private List<Replicate> GetElements(string expression)
