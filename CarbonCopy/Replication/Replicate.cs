@@ -10,9 +10,8 @@ namespace Zinc.CarbonCopy.Replication
         public bool IsClass;
         public bool IsArray;
         public int ConstructorParametersCount;
-        public List<Replicate> Properties;
+        public List<Replicate> Members;
 
         public abstract string Declaration { get; }
-
     }
 }

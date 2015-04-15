@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using EnvDTE;
+using System.Windows.Forms;
 
 namespace Zinc.CarbonCopy
 {
@@ -31,7 +32,6 @@ namespace Zinc.CarbonCopy
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidCarbonCopyPkgString)]
-    [ProvideAutoLoad(UIContextGuids80.Debugging)]
     public sealed class CarbonCopyPackage : Package
     {
         /// <summary>
@@ -80,17 +80,25 @@ namespace Zinc.CarbonCopy
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            string variableName = GetSelectedVariable();
+            CopyDeclaration();
+        }
 
-            var dteInstance = (DTE)GetService(typeof(SDTE));
+        private void CopyDeclaration()
+        {
+            string variableName = null;
+            try
+            {
+                variableName = GetSelectedVariable();
+            }
+            catch (InvalidExpressionException)
+            {
+                MessageBox.Show("Make sure the variable is fully selected.", "Invalid variabale selected");
+                return;
+            }
 
-            var replicateProvider = new ReplicateProvider(dteInstance.Debugger);
+            string declaration = GenerateDeclaration(variableName);
 
-            var replicate = replicateProvider.CreateReplicate(variableName);
-
-            var replicator = new Replication.Replicator();
-
-            string declaration = replicator.GenerateDeclaration(replicate);
+            Clipboard.SetText(declaration);
         }
 
         private string GetSelectedVariable()
@@ -107,6 +115,19 @@ namespace Zinc.CarbonCopy
             }
 
             return selectedVariable;
+        }
+
+        private string GenerateDeclaration(string variableName)
+        {
+            var dteInstance = (DTE)GetService(typeof(SDTE));
+
+            var replicateProvider = new ReplicateProvider(dteInstance.Debugger);
+
+            var replicate = replicateProvider.CreateReplicate(variableName);
+
+            var replicator = new Replication.Replicator();
+
+            return replicator.GenerateDeclaration(replicate);
         }
     }
 }

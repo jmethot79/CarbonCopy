@@ -55,9 +55,9 @@ namespace CarbonCopy_UnitTests
                 ConstructorParametersCount = 0
             };
 
-            Replicate.Properties = new System.Collections.Generic.List<Replicate>();
+            Replicate.Members = new System.Collections.Generic.List<Replicate>();
 
-            Replicate.Properties.Add(new StringReplicate()
+            Replicate.Members.Add(new StringReplicate()
             {
                 Name = "s",
                 Type = "System.String",
@@ -65,7 +65,7 @@ namespace CarbonCopy_UnitTests
                 IsClass = true
             });
 
-            Replicate.Properties.Add(new SimpleReplicate()
+            Replicate.Members.Add(new SimpleReplicate()
             {
                 Name = "d",
                 Type = "System.Decimal",
@@ -93,9 +93,9 @@ namespace CarbonCopy_UnitTests
                 ConstructorParametersCount = 1
             };
 
-            Replicate.Properties = new System.Collections.Generic.List<Replicate>();
+            Replicate.Members = new System.Collections.Generic.List<Replicate>();
 
-            Replicate.Properties.Add(new StringReplicate()
+            Replicate.Members.Add(new StringReplicate()
             {
                 Name = "s",
                 Type = "System.String",
@@ -103,7 +103,7 @@ namespace CarbonCopy_UnitTests
                 IsClass = true
             });
 
-            Replicate.Properties.Add(new SimpleReplicate()
+            Replicate.Members.Add(new SimpleReplicate()
             {
                 Name = "d",
                 Type = "System.Decimal",
@@ -131,9 +131,9 @@ namespace CarbonCopy_UnitTests
                 ConstructorParametersCount = 2
             };
 
-            Replicate.Properties = new System.Collections.Generic.List<Replicate>();
+            Replicate.Members = new System.Collections.Generic.List<Replicate>();
 
-            Replicate.Properties.Add(new StringReplicate()
+            Replicate.Members.Add(new StringReplicate()
             {
                 Name = "s",
                 Type = "System.String",
@@ -141,7 +141,45 @@ namespace CarbonCopy_UnitTests
                 IsClass = true
             });
 
-            Replicate.Properties.Add(new SimpleReplicate()
+            Replicate.Members.Add(new SimpleReplicate()
+            {
+                Name = "d",
+                Type = "System.Decimal",
+                Value = "12.45M",
+                IsClass = false
+            });
+
+            var replicator = new Replicator();
+
+            var result = replicator.GenerateDeclaration(Replicate);
+
+            Assert.AreEqual(535008086, result.GetHashCode());
+        }
+
+        [TestMethod]
+        public void GetArray()
+        {
+
+            Replicate Replicate = new ArrayReplicate()
+            {
+                Name = "anArray",
+                Type = "ConsoleApplication1.Program.A()",
+                Value = "{ConsoleApplication1.Program.A}",
+                IsClass = true,
+                ConstructorParametersCount = 2
+            };
+
+            Replicate.Members = new System.Collections.Generic.List<Replicate>();
+
+            Replicate.Members.Add(new StringReplicate()
+            {
+                Name = "s",
+                Type = "System.String",
+                Value = "s1",
+                IsClass = true
+            });
+
+            Replicate.Members.Add(new SimpleReplicate()
             {
                 Name = "d",
                 Type = "System.Decimal",

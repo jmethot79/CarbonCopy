@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Zinc.CarbonCopy.Replication
 {
-    class ArrayReplicate : Replicate
+    class CollectionReplicate : Replicate
     {
         public override string Declaration
         {
-            get
+            get 
             {
                 var stringBuilder = new StringBuilder();
 
@@ -19,19 +19,19 @@ namespace Zinc.CarbonCopy.Replication
                     stringBuilder.Append("{");
 
                     var membersStringBuilder = new StringBuilder();
-                    foreach(Replicate arrayMember in Members)
+                    foreach (Replicate arrayMember in Members)
                     {
                         if (membersStringBuilder.Length > 0)
                         {
                             membersStringBuilder.AppendLine(",");
                         }
-                        membersStringBuilder.Append(arrayMember.Declaration);  
+                        membersStringBuilder.Append(arrayMember.Declaration);
                     }
 
                     stringBuilder.Append(membersStringBuilder.ToString());
                     stringBuilder.Append("}");
                 }
-                
+
                 return stringBuilder.ToString();
             }
         }

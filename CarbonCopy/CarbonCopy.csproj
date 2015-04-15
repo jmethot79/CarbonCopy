@@ -126,6 +126,8 @@
     <Compile Include="ReplicateProvider.cs" />
     <Compile Include="Replication\ArrayReplicate.cs" />
     <Compile Include="Replication\ClassReplicate.cs" />
+    <Compile Include="Replication\CollectionReplicate.cs" />
+    <Compile Include="Replication\DictionaryReplicate.cs" />
     <Compile Include="Replication\ReplicateFactory.cs" />
     <Compile Include="Replication\SimpleReplicate.cs" />
     <Compile Include="Replication\StringReplicate.cs" />

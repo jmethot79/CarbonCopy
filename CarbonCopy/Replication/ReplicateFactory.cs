@@ -10,7 +10,7 @@ namespace Zinc.CarbonCopy.Replication
             {
                 if (properties.IsString) { return new StringReplicate(); };
 
-                if (properties.IsArray) { return new ArrayReplicate(); };
+                if (properties.IsCollection) { return new CollectionReplicate(); }
 
                 return new ClassReplicate();
             }

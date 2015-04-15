@@ -43,11 +43,11 @@ namespace Zinc.CarbonCopy.Replication
         {
             var stringBuilder = new StringBuilder();
 
-            if (Properties != null)
+            if (Members != null)
             {
                 var propertyStringBuilder = new StringBuilder();
 
-                foreach (var property in Properties)
+                foreach (var property in Members)
                 {
                     if (propertyStringBuilder.Length > 0)
                     {

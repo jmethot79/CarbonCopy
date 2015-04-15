@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zinc.CarbonCopy
 {
+    [Serializable]
     class InvalidExpressionException : Exception
     {
         public InvalidExpressionException(string message) : base(message) { }
