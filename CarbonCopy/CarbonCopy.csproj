@@ -130,7 +130,6 @@
     <Compile Include="Replication\DictionaryReplicate.cs" />
     <Compile Include="Replication\SimpleReplicate.cs" />
     <Compile Include="Replication\StringReplicate.cs" />
-    <Compile Include="Replication\ObjectProperties.cs" />
     <Compile Include="Replication\Replicate.cs" />
     <Compile Include="Replication\Replicator.cs" />
     <Compile Include="Resources.Designer.cs">
