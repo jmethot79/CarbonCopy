@@ -13,3 +13,4 @@ Future releases will include support for:
 - Arrays
 - ICollection implementations
 - Indentation based on IDE personnal settings
+- Other languages declaration (CSharp, etc.)
