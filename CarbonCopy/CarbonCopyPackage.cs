@@ -32,7 +32,8 @@ namespace Zinc.CarbonCopy
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidCarbonCopyPkgString)]
-    [ProvideAutoLoad(UIContextGuids80.Debugging)]
+    //[ProvideAutoLoad(UIContextGuids80.Debugging)]
+    [ProvideAutoLoad("f1536ef8-92ec-443c-9ed7-fdadf150da82")]    
     public sealed class CarbonCopyPackage : Package
     {
         /// <summary>
@@ -68,24 +69,21 @@ namespace Zinc.CarbonCopy
             {
                 // Create the command for the menu item.
                 CommandID menuCommandID = new CommandID(GuidList.guidCarbonCopyCmdSet, (int)PkgCmdIDList.cmdidCopyDeclaration);
-                MenuCommand menuItem = new MenuCommand(MenuItemCallback, menuCommandID );
 
-                //CommandID projectMenuCommandID = new CommandID(GuidList.Interactive_WindowCmdSet, (int)PkgCmdIDList.cmdidLoadUI);
-                //OleMenuCommand projectmenuItem = new OleMenuCommand(MenuItemCallback, menuCommandID);
-                //projectmenuItem.BeforeQueryStatus += menuCommand_BeforeQueryStatus;
-           
-                mcs.AddCommand( menuItem );
-                
+                OleMenuCommand projectmenuItem = new OleMenuCommand(MenuItemCallback, menuCommandID);
+                mcs.AddCommand(projectmenuItem);
+                projectmenuItem.BeforeQueryStatus += menuCommand_BeforeQueryStatus;
             }
         }
         #endregion
 
         private void menuCommand_BeforeQueryStatus(object sender, EventArgs e)
         {
-            MessageBox.Show("test");
-            OleMenuCommand menuCommand = sender as OleMenuCommand;
+             OleMenuCommand menuCommand = sender as OleMenuCommand;
             if (menuCommand != null)
             {
+                var dteInstance = (DTE)GetService(typeof(SDTE));
+                menuCommand.Visible = dteInstance.Debugger.DebuggedProcesses.Count > 0;
             }
         }
 
