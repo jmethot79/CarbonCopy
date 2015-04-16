@@ -32,6 +32,7 @@ namespace Zinc.CarbonCopy
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidCarbonCopyPkgString)]
+    [ProvideAutoLoad(UIContextGuids80.Debugging)]
     public sealed class CarbonCopyPackage : Package
     {
         /// <summary>
@@ -68,10 +69,25 @@ namespace Zinc.CarbonCopy
                 // Create the command for the menu item.
                 CommandID menuCommandID = new CommandID(GuidList.guidCarbonCopyCmdSet, (int)PkgCmdIDList.cmdidCopyDeclaration);
                 MenuCommand menuItem = new MenuCommand(MenuItemCallback, menuCommandID );
+
+                //CommandID projectMenuCommandID = new CommandID(GuidList.Interactive_WindowCmdSet, (int)PkgCmdIDList.cmdidLoadUI);
+                //OleMenuCommand projectmenuItem = new OleMenuCommand(MenuItemCallback, menuCommandID);
+                //projectmenuItem.BeforeQueryStatus += menuCommand_BeforeQueryStatus;
+           
                 mcs.AddCommand( menuItem );
+                
             }
         }
         #endregion
+
+        private void menuCommand_BeforeQueryStatus(object sender, EventArgs e)
+        {
+            MessageBox.Show("test");
+            OleMenuCommand menuCommand = sender as OleMenuCommand;
+            if (menuCommand != null)
+            {
+            }
+        }
 
         /// <summary>
         /// This function is the callback used to execute a command when the a menu item is clicked.
