@@ -18,10 +18,8 @@ namespace Zinc.CarbonCopy
         {
             EnvDTE.Expression expression = _debugger.GetExpression(variableName);
 
-            //TODO: gérer si propriete volontairement settée à nothing, mais constructeur initialise, il faut garder nothing.
             if (expression.Value != "Nothing")
             { 
-                //System.Windows.Forms.MessageBox.Show(_debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value);
                 Replicate replicate = null;
                 if (IsClass(variableName))
                 {
@@ -29,22 +27,21 @@ namespace Zinc.CarbonCopy
                     {
                         replicate = new StringReplicate();
                     }
-                    else if (IsCollection(variableName))
+                    else if (IsArray(variableName))
                     {
-                        replicate = new CollectionReplicate();
-
-                        if (IsArray(variableName))
-                        {
-                            replicate.Members = GetArrayMembers(variableName);
-                        }                    
-                        else if (IsDictionary(variableName))
-                        {
-                            replicate.Members = GetDictionaryMembers(variableName);
-                        }
-                        else
-                        {
-                            replicate.Members = GetCollectionMembers(variableName);
-                        }
+                        replicate = new ArrayReplicate();
+                        replicate.Members = GetArrayMembers(variableName);
+                    }                  
+                    else if (IsDictionary(variableName))
+                    {
+                        replicate = new DictionaryReplicate();
+                        replicate.Members = GetDictionaryMembers(variableName);
+                    }
+                    else if (IsList(variableName))
+                    {
+                        replicate = new ListReplicate();
+                        replicate.Members = GetListMembers(variableName);
+                        replicate.MembersType = _debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName")).Value.Replace("\"",String.Empty);
                     }
                     else
                     {
@@ -74,13 +71,26 @@ namespace Zinc.CarbonCopy
         
         private bool IsString(string variableName)
         {
-            return "System.String" == _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value;
+            return "\"System.String\"" == _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value;
         }
 
-        private bool IsCollection(string variableName)
-        {
-            return true;// "System.String" == _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value;
-        }
+        //private bool IsCollection(string variableName)
+        //{
+        // //            Dim typeCollection = GetType(ICollection)
+        // //If (typeObjet.IsGenericType AndAlso typeCollection.IsAssignableFrom(typeObjet.GetGenericTypeDefinition())) OrElse
+        // //   typeObjet.GetInterfaces().Any(Function(uneInterface) uneInterface.IsGenericType AndAlso uneInterface.GetGenericTypeDefinition() = typeCollection) Then
+
+        //    //var expression = String.Concat("(",variableName,".GetType().IsGenericType AndAlso GetType(ICollection).IsAssignableFrom(",
+        //    //    variableName,".GetType().GetGenericTypeDefinition)) OrElse ", variableName,".GetType().GetInterfaces().Any(Function(anInterface) ",
+        //    //    "anInterface.IsGenericType AndAlso anInterface.GetGenericTypeDefinition() = GetType(ICollection))");
+        //    var expression = String.Concat("(", variableName, ".GetType().IsGenericType AndAlso GetType(ICollection).IsAssignableFrom(",
+        //        variableName, ".GetType().GetGenericTypeDefinition))");
+
+        //    var value = _debugger.GetExpression(expression).Value;
+        //    System.Windows.Forms.MessageBox.Show(expression);
+        //    System.Windows.Forms.MessageBox.Show(value);
+        //    return "True" == _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value;
+        //}
 
         private bool IsArray(string variableName)
         {
@@ -92,9 +102,9 @@ namespace Zinc.CarbonCopy
             return _debugger.GetExpression(String.Concat(variableName, ".GetType().Name")).Value.Contains("Dictionary");
         }
 
-        private List<Replicate> GetReplicateMembers(string variableName)
+        private bool IsList(string variableName)
         {
-            throw new NotImplementedException();
+            return _debugger.GetExpression(String.Concat(variableName, ".GetType().Name")).Value.Contains("List");
         }
 
         private List<Replicate> GetProperties(string variableName)
@@ -123,123 +133,23 @@ namespace Zinc.CarbonCopy
 
         private List<Replicate> GetDictionaryMembers(string variableName)
         {
-            var members = new List<Replicate>();
-
-            //            If Not ObjetsDansCollection.GetEnumerator().MoveNext() Then
-            //   Return String.Empty
-            //End If
-
-            // Dim typeObjetCollection As Type = ObjetsDansCollection(0).GetType()
-            string expression1 = _debugger.GetExpression(String.Concat(variableName, ".First()")).Value;
-            string expression2 = _debugger.GetExpression(String.Concat(variableName, ".First()")).Name;
-            string expression3 = _debugger.GetExpression(String.Concat(variableName, ".First()")).Type;
-
-            //System.IO.File.AppendAllText("c:\test.txt", expression1);
-            //System.IO.File.AppendAllText("c:\test.txt", expression2);
-            //System.IO.File.AppendAllText("c:\test.txt", expression3);
-
-
-            EnvDTE.Expression expression = _debugger.GetExpression(variableName);
-
-            foreach (EnvDTE.Expression dataMember in expression.DataMembers)
-            {
-                var value = _debugger.GetExpression(String.Concat(variableName, dataMember.Name)).Value;
-
-                //todo: FIND Better
-                if (value != "Nothing")
-                {
-                    var name = _debugger.GetExpression(String.Concat(variableName, dataMember.Name)).Name;
-                    var property = CreateReplicate(name);
-
-                    members.Add(property);
-                }
-            }
-
-            if (members.Count == 0)
-            {
-                members = null;
-            }
-
-            return members;
+            throw new NotImplementedException();
         }
 
         private List<Replicate> GetArrayMembers(string variableName)
         {
-            var members = new List<Replicate>();
-
-            //            If Not ObjetsDansCollection.GetEnumerator().MoveNext() Then
-            //   Return String.Empty
-            //End If
-
-            // Dim typeObjetCollection As Type = ObjetsDansCollection(0).GetType()
-            string expression1 = _debugger.GetExpression(String.Concat(variableName, ".First()")).Value;
-            string expression2 = _debugger.GetExpression(String.Concat(variableName, ".First()")).Name;
-            string expression3 = _debugger.GetExpression(String.Concat(variableName, ".First()")).Type;
-
-            //System.IO.File.AppendAllText("c:\test.txt", expression1);
-            //System.IO.File.AppendAllText("c:\test.txt", expression2);
-            //System.IO.File.AppendAllText("c:\test.txt", expression3);
-
-
-            EnvDTE.Expression expression = _debugger.GetExpression(variableName);
-
-            foreach (EnvDTE.Expression dataMember in expression.DataMembers)
-            {
-                var value = _debugger.GetExpression(String.Concat(variableName, dataMember.Name)).Value;
-
-                //todo: FIND Better
-                if (value != "Nothing")
-                {
-                    var name = _debugger.GetExpression(String.Concat(variableName, dataMember.Name)).Name;
-                    var property = CreateReplicate(name);
-
-                    members.Add(property);
-                }
-            }
-
-            if (members.Count == 0)
-            {
-                members = null;
-            }
-
-            return members;
+            throw new NotImplementedException();
         }
 
-        private List<Replicate> GetCollectionMembers(string variableName)
+        private List<Replicate> GetListMembers(string variableName)
         {
             var members = new List<Replicate>();
 
-      //            If Not ObjetsDansCollection.GetEnumerator().MoveNext() Then
-      //   Return String.Empty
-      //End If
+            var itemsCount = Int32.Parse(_debugger.GetExpression(String.Concat(variableName, ".Count")).Value);
 
-     // Dim typeObjetCollection As Type = ObjetsDansCollection(0).GetType()
-            string expression1 = _debugger.GetExpression(String.Concat(variableName,".First()")).Value;
-            string expression2 = _debugger.GetExpression(String.Concat(variableName, ".First()")).Name;
-            string expression3 = _debugger.GetExpression(String.Concat(variableName, ".First()")).Type;
-
-
-
-
-            EnvDTE.Expression expression = _debugger.GetExpression(variableName);
-
-            foreach (EnvDTE.Expression dataMember in expression.DataMembers)
+            for (int i=0; i < itemsCount; i++)
             {
-                var value = _debugger.GetExpression(String.Concat(variableName, dataMember.Name)).Value;
-
-                //todo: FIND Better
-                if (value != "Nothing")
-                {
-                    var name = _debugger.GetExpression(String.Concat(variableName, dataMember.Name)).Name;
-                    var property = CreateReplicate(name);
-
-                    members.Add(property);
-                }
-            }
-
-            if (members.Count == 0)
-            {
-                members = null;
+                members.Add(CreateReplicate(String.Concat(variableName, "(", i.ToString(), ")")));
             }
 
             return members;

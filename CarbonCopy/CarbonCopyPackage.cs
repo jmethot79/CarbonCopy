@@ -92,7 +92,7 @@ namespace Zinc.CarbonCopy
             }
             catch (InvalidExpressionException)
             {
-                MessageBox.Show("Make sure the variable is fully selected.", "Invalid variabale selected");
+                MessageBox.Show("Make sure the object name is fully selected.", "Invalid object selected");
                 return;
             }
 

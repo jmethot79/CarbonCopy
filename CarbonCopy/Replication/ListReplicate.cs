@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zinc.CarbonCopy.Replication
 {
-    class CollectionReplicate : Replicate
+    class ListReplicate : Replicate
     {
         public override string Declaration
         {
@@ -14,9 +14,11 @@ namespace Zinc.CarbonCopy.Replication
             {
                 var stringBuilder = new StringBuilder();
 
+                stringBuilder.Append(GetReplicateType());
+
                 if (Members.Count > 0)
                 {
-                    stringBuilder.Append("{");
+                    stringBuilder.Append(" From {");
 
                     var membersStringBuilder = new StringBuilder();
                     foreach (Replicate arrayMember in Members)
@@ -34,6 +36,10 @@ namespace Zinc.CarbonCopy.Replication
 
                 return stringBuilder.ToString();
             }
+        }
+        public string GetReplicateType()
+        {
+            return String.Concat("New List(Of ", MembersType,")");
         }
     }
 }
