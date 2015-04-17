@@ -94,7 +94,16 @@ namespace Zinc.CarbonCopy
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            CopyDeclaration();
+            try
+            {
+                CopyDeclaration();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(String.Concat(ex.Message, " - ", ex.StackTrace));
+            }
+            
         }
 
         private void CopyDeclaration()

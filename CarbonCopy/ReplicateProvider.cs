@@ -1,6 +1,7 @@
 ﻿using EnvDTE;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using Zinc.CarbonCopy.Replication;
 
 namespace Zinc.CarbonCopy
@@ -16,20 +17,34 @@ namespace Zinc.CarbonCopy
 
         public Replicate CreateReplicate(string variableName)
         {
-            EnvDTE.Expression expression = _debugger.GetExpression(variableName);
+            Replicate replicate = null;
+            try
+            {
+                EnvDTE.Expression expression = _debugger.GetExpression(variableName);
 
-            if (expression.Value != "Nothing")
-            { 
-                Replicate replicate = GetReplicate(variableName);
-            
-                replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
-                replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]","()");
-                replicate.Value = expression.Value.Replace("\"", String.Empty);
+                if (expression.Value != "Nothing")
+                {
+                    replicate = GetReplicate(variableName);
 
-                return replicate;
+                    replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
+                    replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]", "()");
+                    replicate.Value = expression.Value.Replace("\"", String.Empty);
+
+                    return replicate;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Concat("variableName: ", variableName));
+                if (replicate != null)
+                {
+                    MessageBox.Show(String.Format("Name {0} - Type {1} - Value {2} ", replicate.Name, replicate.Type, replicate.Value));
+                }
+                throw ex;
             }
 
-            return null;
         }
 
         private Replicate GetReplicate(string variableName)
