@@ -20,39 +20,7 @@ namespace Zinc.CarbonCopy
 
             if (expression.Value != "Nothing")
             { 
-                Replicate replicate = null;
-                if (IsClass(variableName))
-                {
-                    if (IsString(variableName))
-                    {
-                        replicate = new StringReplicate();
-                    }
-                    else if (IsArray(variableName))
-                    {
-                        replicate = new ArrayReplicate();
-                        replicate.Members = GetArrayMembers(variableName);
-                    }                  
-                    else if (IsDictionary(variableName))
-                    {
-                        replicate = new DictionaryReplicate();
-                        replicate.Members = GetDictionaryMembers(variableName);
-                    }
-                    else if (IsList(variableName))
-                    {
-                        replicate = new ListReplicate();
-                        replicate.Members = GetListMembers(variableName);
-                        replicate.MembersType = _debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName")).Value.Replace("\"",String.Empty);
-                    }
-                    else
-                    {
-                        replicate = new ClassReplicate();
-                        replicate.Members = GetProperties(variableName);
-                    }
-                }
-                else
-                {
-                    replicate = new SimpleReplicate();
-                }
+                Replicate replicate = GetReplicate(variableName);
             
                 replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
                 replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]","()");
@@ -62,6 +30,44 @@ namespace Zinc.CarbonCopy
             }
 
             return null;
+        }
+
+        private Replicate GetReplicate(string variableName)
+        {
+            Replicate replicate = null;
+            if (IsClass(variableName))
+            {
+                if (IsString(variableName))
+                {
+                    replicate = new StringReplicate();
+                }
+                else if (IsArray(variableName))
+                {
+                    replicate = new ArrayReplicate();
+                    replicate.Members = GetArrayMembers(variableName);
+                }
+                else if (IsDictionary(variableName))
+                {
+                    replicate = new DictionaryReplicate();
+                    replicate.Members = GetDictionaryMembers(variableName);
+                }
+                else if (IsList(variableName))
+                {
+                    replicate = new ListReplicate();
+                    replicate.Members = GetListMembers(variableName);
+                    replicate.MembersType = _debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName")).Value.Replace("\"", String.Empty);
+                }
+                else
+                {
+                    replicate = new ClassReplicate();
+                    replicate.Members = GetProperties(variableName);
+                }
+            }
+            else
+            {
+                replicate = new SimpleReplicate();
+            }
+            return replicate;
         }
 
         private bool IsClass(string variableName)
