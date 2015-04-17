@@ -101,7 +101,7 @@ namespace Zinc.CarbonCopy
             catch (Exception ex)
             {
 
-                MessageBox.Show(String.Concat(ex.Message, " - ", ex.StackTrace));
+                MessageBox.Show(String.Concat(ex.Message, ex.StackTrace));
             }
             
         }

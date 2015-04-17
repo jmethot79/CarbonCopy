@@ -21,7 +21,7 @@ namespace Zinc.CarbonCopy
             try
             {
                 EnvDTE.Expression expression = _debugger.GetExpression(variableName);
-
+ 
                 if (expression.Value != "Nothing")
                 {
                     replicate = GetReplicate(variableName);
@@ -37,14 +37,13 @@ namespace Zinc.CarbonCopy
             }
             catch (Exception ex)
             {
-                MessageBox.Show(String.Concat("variableName: ", variableName));
+                MessageBox.Show(String.Concat("In CreateReplicate, variableName: ", variableName));
                 if (replicate != null)
                 {
                     MessageBox.Show(String.Format("Name {0} - Type {1} - Value {2} ", replicate.Name, replicate.Type, replicate.Value));
                 }
                 throw ex;
             }
-
         }
 
         private Replicate GetReplicate(string variableName)
@@ -54,6 +53,7 @@ namespace Zinc.CarbonCopy
             {
                 if (IsString(variableName))
                 {
+
                     replicate = new StringReplicate();
                 }
                 else if (IsArray(variableName))
@@ -120,12 +120,12 @@ namespace Zinc.CarbonCopy
 
         private bool IsDictionary(string variableName)
         {
-            return _debugger.GetExpression(String.Concat(variableName, ".GetType().Name")).Value.Contains("Dictionary");
+            return "\"Dictionary`2\"" == _debugger.GetExpression(String.Concat(variableName, ".GetType().Name")).Value;
         }
 
         private bool IsList(string variableName)
         {
-            return _debugger.GetExpression(String.Concat(variableName, ".GetType().Name")).Value.Contains("List");
+            return "\"List`1\"" == _debugger.GetExpression(String.Concat(variableName, ".GetType().Name")).Value;
         }
 
         private List<Replicate> GetProperties(string variableName)
@@ -141,14 +141,14 @@ namespace Zinc.CarbonCopy
                 if (property != null)
                 {
                     properties.Add(property);
-                } 
+                }
             }
 
             if (properties.Count == 0)
             {
                 properties = null;
             }
-            
+
             return properties;
         }
 
