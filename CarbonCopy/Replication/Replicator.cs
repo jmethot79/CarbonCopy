@@ -6,7 +6,14 @@ namespace Zinc.CarbonCopy.Replication
     {
         public string GenerateDeclaration(Replicate replicate)
         {
-            return String.Concat("Dim ", replicate.Name, " As ", replicate.Declaration);
+            if (replicate.Value == "Nothing")
+            {
+                return String.Concat("Dim ", replicate.Name, " = Nothing");
+            }
+            else
+            {
+                return String.Concat("Dim ", replicate.Name, " As ", replicate.Declaration);
+            }
         }
     }
 }

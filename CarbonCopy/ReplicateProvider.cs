@@ -22,18 +22,21 @@ namespace Zinc.CarbonCopy
             {
                 EnvDTE.Expression expression = _debugger.GetExpression(variableName);
  
-                if (expression.Value != "Nothing")
-                {
+                //if (expression.Value == "Nothing")
+                //{
+                //    replicate = new NullReplicate();
+                //}
+                //else
+                //{
                     replicate = GetReplicate(variableName);
+               // }
 
-                    replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
-                    replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]", "()");
-                    replicate.Value = expression.Value.Replace("\"", String.Empty);
+                replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
+                replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]", "()");
+                replicate.Value = expression.Value.Replace("\"", String.Empty);
 
-                    return replicate;
-                }
-
-                return null;
+                return replicate;
+               
             }
             catch (Exception ex)
             {
