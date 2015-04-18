@@ -64,7 +64,7 @@ namespace Zinc.CarbonCopy
                 {
                     replicate = new ListReplicate();
                     replicate.Members = GetListMembers(variableName);
-                    replicate.MembersType = _debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName")).Value.Replace("\"", String.Empty);
+                    replicate.MembersType = _debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName")).Value.Replace("\"", String.Empty).Replace("+",".");
                 }
                 else
                 {
