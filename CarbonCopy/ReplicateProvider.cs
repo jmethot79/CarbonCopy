@@ -21,16 +21,8 @@ namespace Zinc.CarbonCopy
             try
             {
                 EnvDTE.Expression expression = _debugger.GetExpression(variableName);
- 
-                //if (expression.Value == "Nothing")
-                //{
-                //    replicate = new NullReplicate();
-                //}
-                //else
-                //{
-                    replicate = GetReplicate(variableName);
-               // }
 
+                replicate = GetReplicate(variableName);
                 replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
                 replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]", "()");
                 replicate.Value = expression.Value.Replace("\"", String.Empty);
@@ -56,7 +48,6 @@ namespace Zinc.CarbonCopy
             {
                 if (IsString(variableName))
                 {
-
                     replicate = new StringReplicate();
                 }
                 else if (IsArray(variableName))
@@ -98,25 +89,7 @@ namespace Zinc.CarbonCopy
             return "\"System.String\"" == _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value;
         }
 
-        //private bool IsCollection(string variableName)
-        //{
-        // //            Dim typeCollection = GetType(ICollection)
-        // //If (typeObjet.IsGenericType AndAlso typeCollection.IsAssignableFrom(typeObjet.GetGenericTypeDefinition())) OrElse
-        // //   typeObjet.GetInterfaces().Any(Function(uneInterface) uneInterface.IsGenericType AndAlso uneInterface.GetGenericTypeDefinition() = typeCollection) Then
-
-        //    //var expression = String.Concat("(",variableName,".GetType().IsGenericType AndAlso GetType(ICollection).IsAssignableFrom(",
-        //    //    variableName,".GetType().GetGenericTypeDefinition)) OrElse ", variableName,".GetType().GetInterfaces().Any(Function(anInterface) ",
-        //    //    "anInterface.IsGenericType AndAlso anInterface.GetGenericTypeDefinition() = GetType(ICollection))");
-        //    var expression = String.Concat("(", variableName, ".GetType().IsGenericType AndAlso GetType(ICollection).IsAssignableFrom(",
-        //        variableName, ".GetType().GetGenericTypeDefinition))");
-
-        //    var value = _debugger.GetExpression(expression).Value;
-        //    System.Windows.Forms.MessageBox.Show(expression);
-        //    System.Windows.Forms.MessageBox.Show(value);
-        //    return "True" == _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value;
-        //}
-
-        private bool IsArray(string variableName)
+         private bool IsArray(string variableName)
         {
             return "\"Array\"" == _debugger.GetExpression(String.Concat(variableName, ".GetType().BaseType.Name")).Value;
         }
