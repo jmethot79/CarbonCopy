@@ -16,16 +16,16 @@ namespace Zinc.CarbonCopy.Replication
 
                 if (Members.Count > 0)
                 {
-                    stringBuilder.Append("{");
+                    stringBuilder.Append(String.Concat("New Dictionary(Of ", MembersType, ") From {"));
 
                     var membersStringBuilder = new StringBuilder();
-                    foreach (Replicate arrayMember in Members)
+                    foreach (Replicate member in Members)
                     {
                         if (membersStringBuilder.Length > 0)
                         {
                             membersStringBuilder.AppendLine(",");
                         }
-                        membersStringBuilder.Append(arrayMember.Declaration);
+                        membersStringBuilder.Append(member.Declaration);
                     }
 
                     stringBuilder.Append(membersStringBuilder.ToString());

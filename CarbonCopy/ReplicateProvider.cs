@@ -1,6 +1,7 @@
 ﻿using EnvDTE;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using Zinc.CarbonCopy.Replication;
 
@@ -59,6 +60,14 @@ namespace Zinc.CarbonCopy
                 {
                     replicate = new DictionaryReplicate();
                     replicate.Members = GetDictionaryMembers(variableName);
+
+                    StringBuilder membersType = new StringBuilder();
+
+                    membersType.Append(_debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments(0).FullName")).Value.Replace("\"", String.Empty).Replace("+", "."));
+                    membersType.Append(", ");
+                    membersType.Append(_debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments(1).FullName")).Value.Replace("\"", String.Empty).Replace("+", "."));
+
+                    replicate.MembersType = membersType.ToString();
                 }
                 else if (IsList(variableName))
                 {
@@ -130,7 +139,19 @@ namespace Zinc.CarbonCopy
 
         private List<Replicate> GetDictionaryMembers(string variableName)
         {
-            throw new NotImplementedException();
+            var members = new List<Replicate>();
+
+            var itemsCount = Int32.Parse(_debugger.GetExpression(String.Concat(variableName, ".Count")).Value);
+
+            for (int i = 0; i < itemsCount; i++)
+            {
+                KeyValuePairReplicate member = new KeyValuePairReplicate();
+
+                member.Key = CreateReplicate(String.Concat(variableName, ".Keys(", i.ToString(), ")"));
+                member.Value = CreateReplicate(String.Concat(variableName, ".Values(", i.ToString(), ")"));
+                members.Add(member);
+            }
+            return members;
         }
 
         private List<Replicate> GetArrayMembers(string variableName)
