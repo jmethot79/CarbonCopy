@@ -156,7 +156,16 @@ namespace Zinc.CarbonCopy
 
         private List<Replicate> GetArrayMembers(string variableName)
         {
-            throw new NotImplementedException();
+            var members = new List<Replicate>();
+
+            var itemsCount = Int32.Parse(_debugger.GetExpression(String.Concat(variableName, ".Count")).Value);
+
+            for (int i = 0; i < itemsCount; i++)
+            {
+                members.Add(CreateReplicate(String.Concat(variableName, "(", i.ToString(), ")")));
+            }
+
+            return members;
         }
 
         private List<Replicate> GetListMembers(string variableName)
