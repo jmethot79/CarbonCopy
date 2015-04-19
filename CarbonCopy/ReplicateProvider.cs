@@ -10,23 +10,37 @@ namespace Zinc.CarbonCopy
     class ReplicateProvider
     {
         private Debugger _debugger;
+        private int _level;
 
         public ReplicateProvider(Debugger Debugger)
         {
             _debugger = Debugger;
+            _level = 0;
         }
 
         public Replicate CreateReplicate(string variableName)
         {
+            _level++;
+
             Replicate replicate = null;
             try
             {
-                EnvDTE.Expression expression = _debugger.GetExpression(variableName);
+                if (_level > 15)
+                {
+                    replicate = new NullReplicate();
+                }
+                else
+                {
+                    replicate = GetReplicate(variableName);
+                }
 
-                replicate = GetReplicate(variableName);
+                EnvDTE.Expression expression = _debugger.GetExpression(variableName);
+          
                 replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
                 replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]", "()");
                 replicate.Value = expression.Value.Replace("\"", String.Empty);
+
+                _level--;
 
                 return replicate;
                

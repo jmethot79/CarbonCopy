@@ -129,6 +129,7 @@
     <Compile Include="Replication\KeyValuePairReplicate.cs" />
     <Compile Include="Replication\ListReplicate.cs" />
     <Compile Include="Replication\DictionaryReplicate.cs" />
+    <Compile Include="Replication\NullReplicate.cs" />
     <Compile Include="Replication\SimpleReplicate.cs" />
     <Compile Include="Replication\StringReplicate.cs" />
     <Compile Include="Replication\Replicate.cs" />
