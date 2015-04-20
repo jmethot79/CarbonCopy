@@ -96,14 +96,15 @@ namespace Zinc.CarbonCopy
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 CopyDeclaration();
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
-
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(String.Concat(ex.Message, ex.StackTrace));
             }
-            
         }
 
         private void CopyDeclaration()
@@ -115,6 +116,7 @@ namespace Zinc.CarbonCopy
             }
             catch (InvalidExpressionException)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show("Make sure the object name is fully selected.", "Invalid object selected");
                 return;
             }

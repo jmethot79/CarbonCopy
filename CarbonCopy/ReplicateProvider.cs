@@ -23,37 +23,25 @@ namespace Zinc.CarbonCopy
             _level++;
 
             Replicate replicate = null;
-            try
-            {
-                if (_level > 15)
-                {
-                    replicate = new NullReplicate();
-                }
-                else
-                {
-                    replicate = GetReplicate(variableName);
-                }
 
-                EnvDTE.Expression expression = _debugger.GetExpression(variableName);
+            if (_level > 20) //break infinite loop
+            {
+                replicate = new NullReplicate();
+            }
+            else
+            {
+                replicate = GetReplicate(variableName);
+            }
+
+            EnvDTE.Expression expression = _debugger.GetExpression(variableName);
           
-                replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
-                replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]", "()");
-                replicate.Value = expression.Value.Replace("\"", String.Empty);
+            replicate.Name = expression.Name.Substring(expression.Name.LastIndexOf(".") + 1);
+            replicate.Type = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".").Replace("[]", "()");
+            replicate.Value = expression.Value.Replace("\"", String.Empty);
 
-                _level--;
+            _level--;
 
-                return replicate;
-               
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(String.Concat("In CreateReplicate, variableName: ", variableName));
-                if (replicate != null)
-                {
-                    MessageBox.Show(String.Format("Name {0} - Type {1} - Value {2} ", replicate.Name, replicate.Type, replicate.Value));
-                }
-                throw ex;
-            }
+            return replicate;
         }
 
         private Replicate GetReplicate(string variableName)
