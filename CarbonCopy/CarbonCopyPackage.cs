@@ -163,10 +163,5 @@ namespace Zinc.CarbonCopy
 
             return replicator.GenerateDeclaration(replicate);
         }
-
-        private void SetIndentationSize()
-        {
-
-        }
     }
 }

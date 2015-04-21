@@ -9,7 +9,7 @@ namespace Zinc.CarbonCopy.Replication
     static class Indentation
     {
         public static int IdeIndentSize = 4;
-        public static int Level;
+        public static int Level = 0;
 
         new public static string ToString()
         {
