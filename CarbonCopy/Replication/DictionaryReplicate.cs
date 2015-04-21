@@ -16,6 +16,8 @@ namespace Zinc.CarbonCopy.Replication
 
                 if (Members.Count > 0)
                 {
+                    Indentation.Level++;
+
                     stringBuilder.Append(String.Concat("New Dictionary(Of ", MembersType, ") From {"));
 
                     var membersStringBuilder = new StringBuilder();
@@ -25,8 +27,10 @@ namespace Zinc.CarbonCopy.Replication
                         {
                             membersStringBuilder.AppendLine(",");
                         }
-                        membersStringBuilder.Append(member.Declaration);
+                        membersStringBuilder.Append(String.Concat(Indentation.ToString(), member.Declaration));
                     }
+
+                    Indentation.Level--;
 
                     stringBuilder.Append(membersStringBuilder.ToString());
                     stringBuilder.Append("}");

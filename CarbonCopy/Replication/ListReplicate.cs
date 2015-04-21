@@ -18,6 +18,8 @@ namespace Zinc.CarbonCopy.Replication
 
                 if (Members.Count > 0)
                 {
+                    Indentation.Level++;
+
                     stringBuilder.Append(" From {");
 
                     var membersStringBuilder = new StringBuilder();
@@ -27,8 +29,10 @@ namespace Zinc.CarbonCopy.Replication
                         {
                             membersStringBuilder.AppendLine(",");
                         }
-                        membersStringBuilder.Append(arrayMember.Declaration);
+                        membersStringBuilder.Append(String.Concat(Indentation.ToString(), arrayMember.Declaration));
                     }
+
+                    Indentation.Level--;
 
                     stringBuilder.Append(membersStringBuilder.ToString());
                     stringBuilder.Append("}");

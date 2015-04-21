@@ -126,6 +126,7 @@
     <Compile Include="ReplicateProvider.cs" />
     <Compile Include="Replication\ArrayReplicate.cs" />
     <Compile Include="Replication\ClassReplicate.cs" />
+    <Compile Include="Replication\Indentation.cs" />
     <Compile Include="Replication\KeyValuePairReplicate.cs" />
     <Compile Include="Replication\ListReplicate.cs" />
     <Compile Include="Replication\DictionaryReplicate.cs" />

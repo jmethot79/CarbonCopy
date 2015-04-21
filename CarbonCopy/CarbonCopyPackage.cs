@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using EnvDTE;
 using System.Windows.Forms;
+using Zinc.CarbonCopy.Replication;
 
 namespace Zinc.CarbonCopy
 {
@@ -152,7 +153,20 @@ namespace Zinc.CarbonCopy
 
             var replicator = new Replication.Replicator();
 
+            try
+            {
+                var textEditorProperties = dteInstance.get_Properties("TextEditor", "Basic");
+                var indentSizeProperty = textEditorProperties.Item("IndentSize");
+                Indentation.IdeIndentSize = Int32.Parse(indentSizeProperty.Value.ToString());
+            }
+            catch { }
+
             return replicator.GenerateDeclaration(replicate);
+        }
+
+        private void SetIndentationSize()
+        {
+
         }
     }
 }

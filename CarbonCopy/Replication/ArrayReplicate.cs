@@ -25,7 +25,7 @@ namespace Zinc.CarbonCopy.Replication
                         {
                             membersStringBuilder.AppendLine(",");
                         }
-                        membersStringBuilder.Append(arrayMember.Declaration);  
+                        membersStringBuilder.Append(String.Concat(Indentation.ToString(), arrayMember.Declaration));  
                     }
 
                     stringBuilder.Append(membersStringBuilder.ToString());

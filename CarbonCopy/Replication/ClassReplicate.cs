@@ -45,6 +45,8 @@ namespace Zinc.CarbonCopy.Replication
 
             if (Members != null)
             {
+                Indentation.Level++;
+
                 var propertyStringBuilder = new StringBuilder();
 
                 foreach (var property in Members)
@@ -54,8 +56,10 @@ namespace Zinc.CarbonCopy.Replication
                         propertyStringBuilder.AppendLine(",");
                     }
 
-                    propertyStringBuilder.Append(String.Concat(".", property.Name, " = ", property.Declaration));
+                    propertyStringBuilder.Append(String.Concat(Indentation.ToString(), ".", property.Name, " = ", property.Declaration));
                 }
+
+                Indentation.Level--;
 
                 stringBuilder.AppendLine("With {");
                 stringBuilder.Append(propertyStringBuilder.ToString());
