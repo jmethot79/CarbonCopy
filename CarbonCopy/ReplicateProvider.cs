@@ -119,7 +119,9 @@ namespace Zinc.CarbonCopy
         {
             var properties = new List<Replicate>();
 
-            EnvDTE.Expression expression = _debugger.GetExpression(variableName);
+            string variableType = _debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".");
+
+            EnvDTE.Expression expression = _debugger.GetExpression(String.Concat("DirectCast(", variableName, ",", variableType, ")")); //Need to cast it when list contains abstract type
 
             foreach (EnvDTE.Expression dataMember in expression.DataMembers)
             {
@@ -178,7 +180,10 @@ namespace Zinc.CarbonCopy
 
             for (int i=0; i < itemsCount; i++)
             {
-                members.Add(CreateReplicate(String.Concat(variableName, "(", i.ToString(), ")")));
+                //todo: créer replicate à part, setter le bon type, name du replicate, puis ajouter le membre?
+                Replicate member = CreateReplicate(String.Concat(variableName, "(", i.ToString(), ")"));
+
+                members.Add(member);
             }
 
             return members;
