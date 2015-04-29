@@ -1,14 +1,10 @@
 # CarbonCopy
-This Visual Studio Extension generates the declaration and initialization of an object selected while in debug mode.
 
-The latest release supports:
+CarbonCopy is a Visual Studio Extension that generates the declaration and initialization of an object selected while debugging.
 
-- VB declaration only
-- Declaration of objects of types: Class, List, Arrays, Dictionaries, primitive (String, Integer, etc)
+Current release supports VB.Net declaration only.  Future release will support C#.
+
+See the [CarbonCopy GitHub Page](http://jmethot79.github.io/CarbonCopy) for more information.
 
 
-Future releases will include support for:
 
-- ICollection implementations
-- Indentation based on IDE personnal settings
-- Other languages declaration (CSharp, etc.)
