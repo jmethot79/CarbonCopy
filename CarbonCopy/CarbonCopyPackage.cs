@@ -130,7 +130,7 @@ namespace Zinc.CarbonCopy
         private string GetSelectedVariable()
         {
             var dteInstance = (DTE)GetService(typeof(SDTE));
-            var textDocument = (EnvDTE.TextDocument)dteInstance.ActiveDocument.Object("");
+            var textDocument = (EnvDTE.TextDocument)dteInstance.ActiveDocument.Object(String.Empty);
             var selectedVariable = textDocument.Selection.Text;
 
             EnvDTE.Expression expression = dteInstance.Debugger.GetExpression(selectedVariable);
@@ -147,12 +147,19 @@ namespace Zinc.CarbonCopy
         {
             var dteInstance = (DTE)GetService(typeof(SDTE));
 
-            var replicateProvider = new ReplicateProvider(dteInstance.Debugger);
+            var replicateProvider = ReplicateProviderFactory.CreateReplicateProvider(dteInstance);
 
             var replicate = replicateProvider.CreateReplicate(variableName);
 
-            var replicator = new Replication.Replicator();
+            var replicator = ReplicatorFactory.CreateReplicator(dteInstance);
 
+            SetIndentationSize(dteInstance);
+
+            return replicator.GenerateDeclaration(replicate);
+        }
+
+        private void SetIndentationSize(DTE dteInstance)
+        {
             try
             {
                 var textEditorProperties = dteInstance.get_Properties("TextEditor", "Basic");
@@ -160,8 +167,6 @@ namespace Zinc.CarbonCopy
                 Indentation.IdeIndentSize = Int32.Parse(indentSizeProperty.Value.ToString());
             }
             catch { }
-
-            return replicator.GenerateDeclaration(replicate);
         }
     }
 }

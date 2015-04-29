@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Zinc.CarbonCopy.Replication
+namespace Zinc.CarbonCopy.Replication.Vb
 {
     class ClassReplicate : Replicate
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Zinc.CarbonCopy.Replication
+namespace Zinc.CarbonCopy.Replication.Vb
 {
-    class Replicator
+    class VbReplicator : IReplicator
     {
         public string GenerateDeclaration(Replicate replicate)
         {

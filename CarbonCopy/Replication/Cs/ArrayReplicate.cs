@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zinc.CarbonCopy.Replication
+namespace Zinc.CarbonCopy.Replication.Cs
 {
     class ArrayReplicate : Replicate
     {
