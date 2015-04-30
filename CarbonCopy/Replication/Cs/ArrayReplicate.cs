@@ -12,11 +12,13 @@ namespace Zinc.CarbonCopy.Replication.Cs
         {
             get
             {
+                //            MyClass mc = new MyClass() { S1 = "tes", I1 = 2, A1 = new string[] { "test2", "test2" } };
+
                 var stringBuilder = new StringBuilder();
 
                 if (Members.Count > 0)
                 {
-                    stringBuilder.Append("{");
+                    stringBuilder.Append("new string[] {");
 
                     var membersStringBuilder = new StringBuilder();
                     foreach(Replicate arrayMember in Members)

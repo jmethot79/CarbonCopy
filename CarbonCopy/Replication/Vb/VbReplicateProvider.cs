@@ -1,15 +1,15 @@
 ﻿using EnvDTE;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using Zinc.CarbonCopy.Replication;
 
-namespace Zinc.CarbonCopy.Replication.Cs
+namespace Zinc.CarbonCopy.Replication.Vb
 {
-    class CsReplicateProvider : ReplicateProvider, IReplicateProvider
+    class VbReplicateProvider : ReplicateProvider, IReplicateProvider
     {
-        public CsReplicateProvider(Debugger debugger) : base(debugger) { }
+        public VbReplicateProvider(Debugger debugger) : base(debugger) { }
 
         protected override Replicate CreateNullReplicate() { return new NullReplicate(); }
         protected override Replicate CreateClassReplicate() { return new ClassReplicate(); }
@@ -17,18 +17,18 @@ namespace Zinc.CarbonCopy.Replication.Cs
         protected override Replicate CreateArrayReplicate() { return new ArrayReplicate(); }
         protected override Replicate CreateDictionaryReplicate() { return new DictionaryReplicate(); }
 
-        protected override List<Replicate> GetDictionaryMembers(string variableName)
+        protected override List<Replicate> GetDictionaryMembers(string variableName) 
         {
             var members = new List<Replicate>();
 
-            var itemsCount = Int32.Parse(Debugger.GetExpression(String.Concat(variableName, ".Count()")).Value);
+            var itemsCount = Int32.Parse(Debugger.GetExpression(String.Concat(variableName, ".Count")).Value);
 
             for (int i = 0; i < itemsCount; i++)
             {
                 KeyValuePairReplicate member = new KeyValuePairReplicate();
 
-                member.Key = CreateReplicate(String.Concat(variableName, ".Keys[", i.ToString(), "]"));
-                member.Value = CreateReplicate(String.Concat(variableName, ".Values[", i.ToString(), "]"));
+                member.Key = CreateReplicate(String.Concat(variableName, ".Keys(", i.ToString(), ")"));
+                member.Value = CreateReplicate(String.Concat(variableName, ".Values(", i.ToString(), ")"));
                 members.Add(member);
             }
             return members;
@@ -38,11 +38,11 @@ namespace Zinc.CarbonCopy.Replication.Cs
         {
             var members = new List<Replicate>();
 
-            var itemsCount = Int32.Parse(Debugger.GetExpression(String.Concat(variableName, ".Count()")).Value);
+            var itemsCount = Int32.Parse(Debugger.GetExpression(String.Concat(variableName, ".Count")).Value);
 
             for (int i = 0; i < itemsCount; i++)
             {
-                members.Add(CreateReplicate(String.Concat(variableName, "[", i.ToString(), "]")));
+                members.Add(CreateReplicate(String.Concat(variableName, "(", i.ToString(), ")")));
             }
 
             return members;
@@ -52,11 +52,12 @@ namespace Zinc.CarbonCopy.Replication.Cs
         {
             var members = new List<Replicate>();
 
-            var itemsCount = Int32.Parse(Debugger.GetExpression(String.Concat(variableName, ".Count()")).Value);
+            var itemsCount = Int32.Parse(Debugger.GetExpression(String.Concat(variableName, ".Count")).Value);
 
             for (int i = 0; i < itemsCount; i++)
             {
-                Replicate member = CreateReplicate(String.Concat(variableName, "[", i.ToString(), "]"));
+                //todo: créer replicate à part, setter le bon type, name du replicate, puis ajouter le membre?
+                Replicate member = CreateReplicate(String.Concat(variableName, "(", i.ToString(), ")"));
 
                 members.Add(member);
             }
@@ -70,7 +71,7 @@ namespace Zinc.CarbonCopy.Replication.Cs
 
             string variableType = Debugger.GetExpression(String.Concat(variableName, ".GetType().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".");
 
-            EnvDTE.Expression expression = Debugger.GetExpression(String.Concat("(", variableType, ")", variableName)); //Need to cast it when list contains abstract type
+            EnvDTE.Expression expression = Debugger.GetExpression(String.Concat("DirectCast(", variableName, ",", variableType, ")")); //Need to cast it when list contains abstract type
 
             foreach (EnvDTE.Expression dataMember in expression.DataMembers)
             {
@@ -88,6 +89,6 @@ namespace Zinc.CarbonCopy.Replication.Cs
             }
 
             return properties;
-        }         
+        }
     }
 }

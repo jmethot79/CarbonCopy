@@ -117,8 +117,6 @@ namespace Zinc.CarbonCopy.Replication
 
         protected abstract Replicate CreateNullReplicate();
         protected abstract Replicate CreateClassReplicate();
-        //protected abstract Replicate CreateStringReplicate();
-        //protected abstract Replicate CreateSimpleReplicate();
         protected abstract Replicate CreateListReplicate();
         protected abstract Replicate CreateArrayReplicate();
         protected abstract Replicate CreateDictionaryReplicate();

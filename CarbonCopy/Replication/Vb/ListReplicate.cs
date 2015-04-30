@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zinc.CarbonCopy.Replication.Cs
+namespace Zinc.CarbonCopy.Replication.Vb
 {
     class ListReplicate : Replicate
     {
@@ -20,7 +20,7 @@ namespace Zinc.CarbonCopy.Replication.Cs
                 {
                     Indentation.Level++;
 
-                    stringBuilder.Append(" {");
+                    stringBuilder.Append(" From {");
 
                     var membersStringBuilder = new StringBuilder();
                     foreach (Replicate arrayMember in Members)
@@ -43,7 +43,7 @@ namespace Zinc.CarbonCopy.Replication.Cs
         }
         public string GetReplicateType()
         {
-            return String.Concat("new List<", MembersType,">");
+            return String.Concat("New List(Of ", MembersType,")");
         }
     }
 }

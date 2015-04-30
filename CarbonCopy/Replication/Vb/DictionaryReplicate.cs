@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zinc.CarbonCopy.Replication.Cs
+namespace Zinc.CarbonCopy.Replication.Vb
 {
-    class ListReplicate : Replicate
+    class DictionaryReplicate : Replicate
     {
         public override string Declaration
         {
@@ -14,22 +14,20 @@ namespace Zinc.CarbonCopy.Replication.Cs
             {
                 var stringBuilder = new StringBuilder();
 
-                stringBuilder.Append(GetReplicateType());
-
                 if (Members.Count > 0)
                 {
                     Indentation.Level++;
 
-                    stringBuilder.Append(" {");
+                    stringBuilder.Append(String.Concat("New Dictionary(Of ", MembersType, ") From {"));
 
                     var membersStringBuilder = new StringBuilder();
-                    foreach (Replicate arrayMember in Members)
+                    foreach (Replicate member in Members)
                     {
                         if (membersStringBuilder.Length > 0)
                         {
                             membersStringBuilder.AppendLine(",");
                         }
-                        membersStringBuilder.Append(String.Concat(Indentation.ToString(), arrayMember.Declaration));
+                        membersStringBuilder.Append(String.Concat(Indentation.ToString(), member.Declaration));
                     }
 
                     Indentation.Level--;
@@ -40,10 +38,6 @@ namespace Zinc.CarbonCopy.Replication.Cs
 
                 return stringBuilder.ToString();
             }
-        }
-        public string GetReplicateType()
-        {
-            return String.Concat("new List<", MembersType,">");
         }
     }
 }

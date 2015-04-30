@@ -14,7 +14,7 @@ namespace Zinc.CarbonCopy.Replication.Cs
             }
             else
             {
-                return String.Concat(replicate.Type, " ", replicate.Name, " ", replicate.Declaration, ";");
+                return String.Concat(replicate.Type, " ", replicate.Name, " = ", replicate.Declaration, ";");
             }
         }
     }
