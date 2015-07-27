@@ -60,14 +60,7 @@ namespace Zinc.CarbonCopy.Replication
                 {
                     replicate = CreateDictionaryReplicate();
                     replicate.Members = GetDictionaryMembers(variableName);
-
-                    StringBuilder membersType = new StringBuilder();
-
-                    membersType.Append(Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments(0).FullName")).Value.Replace("\"", String.Empty).Replace("+", "."));
-                    membersType.Append(", ");
-                    membersType.Append(Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments(1).FullName")).Value.Replace("\"", String.Empty).Replace("+", "."));
-
-                    replicate.MembersType = membersType.ToString();
+                    replicate.MembersType = GetDictionaryMembersType(variableName);
                 }
                 else if (IsList(variableName))
                 {
@@ -124,5 +117,6 @@ namespace Zinc.CarbonCopy.Replication
         protected abstract List<Replicate> GetListMembers(string variableName);
         protected abstract List<Replicate> GetArrayMembers(string variableName);
         protected abstract List<Replicate> GetDictionaryMembers(string variableName);
+        protected abstract string GetDictionaryMembersType(string variableName);
     }
 }

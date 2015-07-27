@@ -20,7 +20,7 @@ namespace Zinc.CarbonCopy.Replication.Vb
                 {
                     Indentation.Level++;
 
-                    stringBuilder.Append(" From {");
+                    stringBuilder.AppendLine(" From {");
 
                     var membersStringBuilder = new StringBuilder();
                     foreach (Replicate arrayMember in Members)

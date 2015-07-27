@@ -14,13 +14,13 @@ namespace Zinc.CarbonCopy.Replication.Cs
             {
                 var stringBuilder = new StringBuilder();
 
-                stringBuilder.Append(GetReplicateType());
+                stringBuilder.AppendLine(GetReplicateType());
 
                 if (Members.Count > 0)
                 {
-                    Indentation.Level++;
+                    stringBuilder.AppendLine(String.Concat(Indentation.ToString(), "{"));
 
-                    stringBuilder.Append(" {");
+                    Indentation.Level++;
 
                     var membersStringBuilder = new StringBuilder();
                     foreach (Replicate arrayMember in Members)
@@ -34,8 +34,8 @@ namespace Zinc.CarbonCopy.Replication.Cs
 
                     Indentation.Level--;
 
-                    stringBuilder.Append(membersStringBuilder.ToString());
-                    stringBuilder.Append("}");
+                    stringBuilder.AppendLine(membersStringBuilder.ToString());
+                    stringBuilder.Append(String.Concat(Indentation.ToString(), "}"));
                 }
 
                 return stringBuilder.ToString();

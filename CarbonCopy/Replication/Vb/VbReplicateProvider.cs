@@ -90,5 +90,16 @@ namespace Zinc.CarbonCopy.Replication.Vb
 
             return properties;
         }
+
+        protected override string GetDictionaryMembersType(string variableName)
+        {
+            StringBuilder membersType = new StringBuilder();
+
+            membersType.Append(Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments(0).FullName")).Value.Replace("\"", String.Empty).Replace("+", "."));
+            membersType.Append(", ");
+            membersType.Append(Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments(1).FullName")).Value.Replace("\"", String.Empty).Replace("+", "."));
+
+            return membersType.ToString();
+        }
     }
 }

@@ -12,13 +12,14 @@ namespace Zinc.CarbonCopy.Replication.Cs
         {
             get
             {
-                //            MyClass mc = new MyClass() { S1 = "tes", I1 = 2, A1 = new string[] { "test2", "test2" } };
-
                 var stringBuilder = new StringBuilder();
 
                 if (Members.Count > 0)
                 {
-                    stringBuilder.Append("new string[] {");
+                    stringBuilder.AppendLine("new string[]");
+                    stringBuilder.AppendLine(String.Concat(Indentation.ToString(), "{"));
+
+                    Indentation.Level++;
 
                     var membersStringBuilder = new StringBuilder();
                     foreach(Replicate arrayMember in Members)
@@ -30,8 +31,10 @@ namespace Zinc.CarbonCopy.Replication.Cs
                         membersStringBuilder.Append(String.Concat(Indentation.ToString(), arrayMember.Declaration));  
                     }
 
-                    stringBuilder.Append(membersStringBuilder.ToString());
-                    stringBuilder.Append("}");
+                    Indentation.Level--;
+
+                    stringBuilder.AppendLine(membersStringBuilder.ToString());
+                    stringBuilder.Append(String.Concat(Indentation.ToString(), "}"));
                 }
                 
                 return stringBuilder.ToString();

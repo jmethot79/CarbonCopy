@@ -27,8 +27,8 @@ namespace Zinc.CarbonCopy.Replication.Cs
             {
                 KeyValuePairReplicate member = new KeyValuePairReplicate();
 
-                member.Key = CreateReplicate(String.Concat(variableName, ".Keys[", i.ToString(), "]"));
-                member.Value = CreateReplicate(String.Concat(variableName, ".Values[", i.ToString(), "]"));
+                member.Key = CreateReplicate(String.Concat(variableName, ".Keys.ElementAt(", i.ToString(), ")"));
+                member.Value = CreateReplicate(String.Concat(variableName, ".Values.ElementAt(", i.ToString(), ")"));
                 members.Add(member);
             }
             return members;
@@ -88,6 +88,17 @@ namespace Zinc.CarbonCopy.Replication.Cs
             }
 
             return properties;
-        }         
+        }
+
+        protected override string GetDictionaryMembersType(string variableName)
+        {
+            StringBuilder membersType = new StringBuilder();
+
+            membersType.Append(Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments[0].FullName")).Value.Replace("\"", String.Empty).Replace("+", "."));
+            membersType.Append(", ");
+            membersType.Append(Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments[1].FullName")).Value.Replace("\"", String.Empty).Replace("+", "."));
+
+            return membersType.ToString();
+        }
     }
 }
