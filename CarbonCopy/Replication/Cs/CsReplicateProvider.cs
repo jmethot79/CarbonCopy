@@ -74,11 +74,14 @@ namespace Zinc.CarbonCopy.Replication.Cs
 
             foreach (EnvDTE.Expression dataMember in expression.DataMembers)
             {
-                var property = CreateReplicate(String.Concat(variableName, ".", dataMember.Name));
-
-                if (property != null)
+                if (IsPropertyInitializable(variableName, dataMember.Name))
                 {
-                    properties.Add(property);
+                    var property = CreateReplicate(String.Concat(variableName, ".", dataMember.Name));
+
+                    if (property != null)
+                    {
+                        properties.Add(property);
+                    }
                 }
             }
 
@@ -88,6 +91,24 @@ namespace Zinc.CarbonCopy.Replication.Cs
             }
 
             return properties;
+        }
+
+        private bool IsPropertyInitializable(string variableName, string propertyName)
+        {
+            return IsPropertyWritable(variableName, propertyName) ||
+                IsFieldPublic(variableName, propertyName);
+        }
+
+        private bool IsFieldPublic(string variableName, string propertyName)
+        {
+            var t = Debugger.GetExpression(String.Concat(variableName, ".GetType().GetField(\"", propertyName, "\", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).IsInitOnly")).Value;
+            return "false" == Debugger.GetExpression(String.Concat(variableName, ".GetType().GetField(\"", propertyName, "\", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).IsInitOnly")).Value;
+        }
+
+        private bool IsPropertyWritable(string variableName, string propertyName)
+        {
+            var t = Debugger.GetExpression(String.Concat(variableName, ".GetType().GetProperty(\"", propertyName, "\", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).CanWrite")).Value;
+            return "true" == Debugger.GetExpression(String.Concat(variableName, ".GetType().GetProperty(\"", propertyName, "\", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).CanWrite")).Value;
         }
 
         protected override string GetDictionaryMembersType(string variableName)

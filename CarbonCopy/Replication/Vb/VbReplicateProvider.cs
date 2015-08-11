@@ -75,11 +75,14 @@ namespace Zinc.CarbonCopy.Replication.Vb
 
             foreach (EnvDTE.Expression dataMember in expression.DataMembers)
             {
-                var property = CreateReplicate(String.Concat(variableName, ".", dataMember.Name));
-
-                if (property != null)
+                if (IsPropertyInitializable(variableName, dataMember.Name))
                 {
-                    properties.Add(property);
+                    var property = CreateReplicate(String.Concat(variableName, ".", dataMember.Name));
+
+                    if (property != null)
+                    {
+                        properties.Add(property);
+                    }
                 }
             }
 
@@ -89,6 +92,22 @@ namespace Zinc.CarbonCopy.Replication.Vb
             }
 
             return properties;
+        }
+
+        private bool IsPropertyInitializable(string variableName, string propertyName)
+        {
+            return IsPropertyWritable(variableName, propertyName) ||
+                IsFieldPublic(variableName, propertyName);
+        }
+
+        private bool IsFieldPublic(string variableName, string propertyName)
+        {
+            return "False" == Debugger.GetExpression(String.Concat(variableName, ".GetType().GetField(\"", propertyName, "\", System.Reflection.BindingFlags.Public Or System.Reflection.BindingFlags.Instance).IsInitOnly")).Value;
+        }
+
+        private bool IsPropertyWritable(string variableName, string propertyName)
+        {
+            return "True" == Debugger.GetExpression(String.Concat(variableName, ".GetType().GetProperty(\"", propertyName, "\", System.Reflection.BindingFlags.Public Or System.Reflection.BindingFlags.Instance).CanWrite")).Value;
         }
 
         protected override string GetDictionaryMembersType(string variableName)
