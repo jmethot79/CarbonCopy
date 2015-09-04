@@ -10,11 +10,11 @@ namespace Zinc.CarbonCopy.Replication.Cs
 
             if (replicate.Value == "null")
             {
-                return String.Concat(replicate.Type, " ", replicate.Name, " = null;");
+                return String.Concat("var ", replicate.Name, " = null;");
             }
             else
             {
-                return String.Concat(replicate.Type, " ", replicate.Name, " = ", replicate.Declaration, ";");
+                return String.Concat("var ", replicate.Name, " = ", replicate.Declaration, ";");
             }
         }
     }
