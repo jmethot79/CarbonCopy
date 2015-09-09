@@ -8,6 +8,7 @@ namespace Zinc.CarbonCopy
 
         public static ObjectDeclaration CreateObjectDeclaration(string variableName)
         {
+            //TODO: evaluer toutes les expressions en 1 seul call au debugger
             if (IsClass(variableName))
             {
                 //if (IsString(variableName))

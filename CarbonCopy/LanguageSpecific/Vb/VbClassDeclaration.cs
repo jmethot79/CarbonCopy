@@ -12,32 +12,13 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append(String.Concat("New ", Type));
-
-            //var constructorDeclaration = GetConstructorDeclaration();
-            //stringBuilder.Append(String.Concat("(", constructorDeclaration, ") "));
+            stringBuilder.Append(String.Concat("New ", Type, "()"));
 
             var propertiesDeclaration = GetPropertiesDeclaration();
             stringBuilder.Append(propertiesDeclaration);
 
             return stringBuilder.ToString();
         }
-
-        //    private string GetConstructorDeclaration()
-        //    {
-        //        var stringBuilder = new StringBuilder();
-
-        //        for (int i = 1; i <= ConstructorParametersCount; i++)
-        //        {
-        //            if (stringBuilder.Length > 0)
-        //            {
-        //                stringBuilder.Append(", ");
-        //            }
-        //            stringBuilder.Append("Nothing");
-        //        }
-
-        //        return stringBuilder.ToString();
-        //    }
 
 
         private string GetPropertiesDeclaration()

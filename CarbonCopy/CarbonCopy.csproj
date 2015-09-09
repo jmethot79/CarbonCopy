@@ -124,6 +124,7 @@
     <Compile Include="ClassDeclarationHelper.cs" />
     <Compile Include="IVariableDeclaration.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpExpressions.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpNullInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpObjectDeclarationFactory.cs" />
     <Compile Include="DebuggerHelper.cs" />
     <Compile Include="Expressions.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="LanguageSpecific\ILanguageSpecificObjectDeclarationFactory.cs" />
     <Compile Include="LanguageSpecific\LanguageSpecificObjectDeclarationFactoryFactory.cs" />
     <Compile Include="LanguageSpecific\VariableDeclarationFactory.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbNullInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbVariableDeclaration.cs" />
     <Compile Include="PrimitiveDeclaration.cs" />
     <Compile Include="ObjectDeclaration.cs" />

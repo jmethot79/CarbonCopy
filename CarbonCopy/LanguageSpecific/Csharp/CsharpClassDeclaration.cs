@@ -12,10 +12,7 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine(String.Concat("new ", Type));
-
-            //var constructorDeclaration = GetConstructorDeclaration();
-            //stringBuilder.Append(String.Concat("(", constructorDeclaration, ") "));
+            stringBuilder.AppendLine(String.Concat("new ", Type, "()"));
 
             var propertiesDeclaration = GetPropertiesDeclaration();
             stringBuilder.Append(propertiesDeclaration);

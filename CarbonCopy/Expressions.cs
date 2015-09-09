@@ -20,5 +20,9 @@ namespace Zinc.CarbonCopy
         }
 
         public abstract string Cast(string variableName, string variableType);
+
+        public abstract string IsInitOnly(string variableName, string propertyName);
+
+        public abstract string CanWrite(string variableName, string propertyName);
     }
 }
