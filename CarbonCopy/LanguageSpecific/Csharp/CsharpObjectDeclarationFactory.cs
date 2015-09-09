@@ -18,5 +18,10 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
         {
             return new DatetimeInitialization(variableName);
         }
+
+        public ObjectDeclaration CreateStringInitialization(string variableName)
+        {
+            return new StringInitialization(variableName);
+        }
     }
 }

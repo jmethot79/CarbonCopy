@@ -11,10 +11,10 @@ namespace Zinc.CarbonCopy
             //TODO: evaluer toutes les expressions en 1 seul call au debugger
             if (IsClass(variableName))
             {
-                //if (IsString(variableName))
-                //{
-                //    replicate = new StringReplicate();
-                //}
+                if (IsString(variableName))
+                {
+                    return LanguageSpecificObjectDeclarationFactory.CreateStringInitialization(variableName);
+                }
                 //else if (IsArray(variableName))
                 //{
                 //    replicate = CreateArrayReplicate();
@@ -32,10 +32,10 @@ namespace Zinc.CarbonCopy
                 //    replicate.Members = GetListMembers(variableName);
                 //    replicate.MembersType = Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".");
                 //}
-                //else
-                //{
+                else
+                {
                     return LanguageSpecificObjectDeclarationFactory.CreateClassDeclaration(variableName);
-                //}
+                }
             }
             else
             {
@@ -53,6 +53,11 @@ namespace Zinc.CarbonCopy
         private static bool IsClass(string variableName)
         {
             return "true" == DebuggerHelper.GetValue(ExpressionsHelper.IsClass(variableName)).ToLower();
+        }
+
+        private static bool IsString(string variableName)
+        {
+            return "\"System.String\"" == DebuggerHelper.GetValue(ExpressionsHelper.Type(variableName));
         }
 
         private static bool IsDatetime(string variableName)

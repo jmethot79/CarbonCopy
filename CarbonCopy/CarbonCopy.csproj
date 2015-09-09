@@ -168,6 +168,7 @@
     <Compile Include="PkgCmdID.cs" />
     <Compile Include="LanguageSpecific\Vb\VbExpressions.cs" />
     <Compile Include="LanguageSpecific\Vb\VbObjectDeclarationFactory.cs" />
+    <Compile Include="StringInitialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">

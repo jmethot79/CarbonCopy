@@ -18,5 +18,10 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
         {
             return new PrimitiveDeclaration(variableName);
         }
+
+        public ObjectDeclaration CreateStringInitialization(string variableName)
+        {
+            return new StringInitialization(variableName);
+        }
     }
 }
