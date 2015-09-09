@@ -38,13 +38,25 @@ namespace Zinc.CarbonCopy
             }
             else
             {
-                return LanguageSpecificObjectDeclarationFactory.CreatePrimitiveDeclaration(variableName);
+                if (IsDatetime(variableName))
+                {
+                    return LanguageSpecificObjectDeclarationFactory.CreateDatetimeDeclaration(variableName);
+                }
+                else
+                {
+                    return LanguageSpecificObjectDeclarationFactory.CreatePrimitiveDeclaration(variableName);
+                }
             }
         }
 
         private static bool IsClass(string variableName)
         {
             return "true" == DebuggerHelper.GetValue(ExpressionsHelper.IsClass(variableName)).ToLower();
+        }
+
+        private static bool IsDatetime(string variableName)
+        {
+            return DebuggerHelper.GetValue(ExpressionsHelper.Type(variableName)).Contains("DateTime");
         }
     }
 }

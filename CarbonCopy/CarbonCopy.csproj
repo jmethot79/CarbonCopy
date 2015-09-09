@@ -132,6 +132,7 @@
     <Compile Include="IExpressions.cs" />
     <Compile Include="InvalidExpressionException.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpVariableDeclaration.cs" />
+    <Compile Include="LanguageSpecific\Csharp\DatetimeInitialization.cs" />
     <Compile Include="LanguageSpecific\ILanguageSpecificObjectDeclarationFactory.cs" />
     <Compile Include="LanguageSpecific\LanguageSpecificObjectDeclarationFactoryFactory.cs" />
     <Compile Include="LanguageSpecific\VariableDeclarationFactory.cs" />

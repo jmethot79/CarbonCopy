@@ -13,5 +13,10 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
         {
             return new PrimitiveDeclaration(variableName);
         }
+
+        public ObjectDeclaration CreateDatetimeDeclaration(string variableName)
+        {
+            return new DatetimeInitialization(variableName);
+        }
     }
 }
