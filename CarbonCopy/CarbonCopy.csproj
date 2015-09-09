@@ -121,33 +121,39 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassDeclarationHelper.cs" />
+    <Compile Include="IVariableDeclaration.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpExpressions.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpObjectDeclarationFactory.cs" />
+    <Compile Include="DebuggerHelper.cs" />
+    <Compile Include="Expressions.cs" />
+    <Compile Include="ExpressionsHelper.cs" />
     <Compile Include="Guids.cs" />
+    <Compile Include="IExpressions.cs" />
     <Compile Include="InvalidExpressionException.cs" />
-    <Compile Include="Replication\Cs\ArrayReplicate.cs" />
-    <Compile Include="Replication\Cs\ClassReplicate.cs" />
-    <Compile Include="Replication\Cs\CsReplicateProvider.cs" />
-    <Compile Include="Replication\Cs\CsReplicator.cs" />
-    <Compile Include="Replication\Cs\DictionaryReplicate.cs" />
-    <Compile Include="Replication\Cs\KeyValuePairReplicate.cs" />
-    <Compile Include="Replication\Cs\ListReplicate.cs" />
-    <Compile Include="Replication\Cs\NullReplicate.cs" />
-    <Compile Include="Replication\IReplicateProvider.cs" />
-    <Compile Include="Replication\IReplicator.cs" />
-    <Compile Include="Replication\ReplicateProvider.cs" />
-    <Compile Include="Replication\ReplicatorFactory.cs" />
-    <Compile Include="Replication\Vb\VbReplicateProvider.cs" />
-    <Compile Include="Replication\Vb\ArrayReplicate.cs" />
-    <Compile Include="Replication\Vb\ClassReplicate.cs" />
-    <Compile Include="Replication\Indentation.cs" />
-    <Compile Include="Replication\Vb\KeyValuePairReplicate.cs" />
-    <Compile Include="Replication\Vb\ListReplicate.cs" />
-    <Compile Include="Replication\Vb\DictionaryReplicate.cs" />
-    <Compile Include="Replication\Vb\NullReplicate.cs" />
-    <Compile Include="Replication\ReplicateProviderFactory.cs" />
-    <Compile Include="Replication\SimpleReplicate.cs" />
-    <Compile Include="Replication\StringReplicate.cs" />
-    <Compile Include="Replication\Replicate.cs" />
-    <Compile Include="Replication\Vb\VbReplicator.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpVariableDeclaration.cs" />
+    <Compile Include="LanguageSpecific\ILanguageSpecificObjectDeclarationFactory.cs" />
+    <Compile Include="LanguageSpecific\LanguageSpecificObjectDeclarationFactoryFactory.cs" />
+    <Compile Include="LanguageSpecific\VariableDeclarationFactory.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbVariableDeclaration.cs" />
+    <Compile Include="PrimitiveDeclaration.cs" />
+    <Compile Include="ObjectDeclaration.cs" />
+    <Compile Include="ObjectDeclarationFactory.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpClassDeclaration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LanguageSpecific\IReplicateProvider.cs" />
+    <Compile Include="LanguageSpecific\IReplicator.cs" />
+    <Compile Include="Indentation.cs" />
+    <Compile Include="LanguageSpecific\LanguageSpecificExpressionsFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LanguageSpecific\SimpleReplicate.cs" />
+    <Compile Include="LanguageSpecific\StringReplicate.cs" />
+    <Compile Include="LanguageSpecific\Replicate.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbClassDeclaration.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,6 +163,8 @@
     <Compile Include="CarbonCopyPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PkgCmdID.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbExpressions.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbObjectDeclarationFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">

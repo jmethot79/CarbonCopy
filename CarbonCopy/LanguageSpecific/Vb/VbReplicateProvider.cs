@@ -12,7 +12,7 @@ namespace Zinc.CarbonCopy.Replication.Vb
         public VbReplicateProvider(Debugger debugger) : base(debugger) { }
 
         protected override Replicate CreateNullReplicate() { return new NullReplicate(); }
-        protected override Replicate CreateClassReplicate() { return new ClassReplicate(); }
+        protected override Replicate CreateClassReplicate() { return new VbClassDeclaration(); }
         protected override Replicate CreateListReplicate() { return new ListReplicate(); }
         protected override Replicate CreateArrayReplicate() { return new ArrayReplicate(); }
         protected override Replicate CreateDictionaryReplicate() { return new DictionaryReplicate(); }

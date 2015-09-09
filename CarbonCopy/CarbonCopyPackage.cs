@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Shell;
 using EnvDTE;
 using System.Windows.Forms;
 using Zinc.CarbonCopy.Replication;
+using Zinc.CarbonCopy.LanguageSpecific;
 
 namespace Zinc.CarbonCopy
 {
@@ -122,9 +123,7 @@ namespace Zinc.CarbonCopy
                 return;
             }
 
-            string declaration = GenerateDeclaration(variableName);
-
-            Clipboard.SetText(declaration);
+            Clipboard.SetText(GenerateDeclaration(variableName));
         }
 
         private string GetSelectedVariable()
@@ -147,15 +146,24 @@ namespace Zinc.CarbonCopy
         {
             var dteInstance = (DTE)GetService(typeof(SDTE));
 
-            var replicateProvider = ReplicateProviderFactory.CreateReplicateProvider(dteInstance);
+            SetDefaultSettings(dteInstance);
 
-            var replicate = replicateProvider.CreateReplicate(variableName);
+            var variableDeclaration = VariableDeclarationFactory.CreateVariableDeclaration(dteInstance);
 
-            var replicator = ReplicatorFactory.CreateReplicator(dteInstance);
+            return variableDeclaration.GetDeclaration(variableName);
+        }
+
+        private void SetDefaultSettings(DTE dteInstance)
+        {
+            DebuggerHelper.Debugger = dteInstance.Debugger;
+
+            DebuggerHelper.KnownValues = new System.Collections.Generic.Dictionary<string, object>();
+
+            ExpressionsHelper.LanguageSpecificExpressions = LanguageSpecificExpressionsFactory.CreateExpressions(dteInstance);
+
+            ObjectDeclarationFactory.LanguageSpecificObjectDeclarationFactory = LanguageSpecificObjectDeclarationFactoryFactory.CreateFactory(dteInstance);
 
             SetIndentationSize(dteInstance);
-
-            return replicator.GenerateDeclaration(replicate);
         }
 
         private void SetIndentationSize(DTE dteInstance)
