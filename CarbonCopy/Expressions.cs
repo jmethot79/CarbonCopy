@@ -4,9 +4,14 @@ namespace Zinc.CarbonCopy
 {
     abstract class Expressions
     {
-        public string Type(string variableName)
+        public string TypeFullName(string variableName)
         {
             return String.Concat(variableName, ".GetType().FullName");
+        }
+
+        public string TypeName(string variableName)
+        {
+            return String.Concat(variableName, ".GetType().Name");
         }
 
         public string ItemsCount(string variableName)
@@ -17,6 +22,11 @@ namespace Zinc.CarbonCopy
         public string IsClass(string variableName)
         {
             return String.Concat(variableName, ".GetType().IsClass");
+        }
+
+        public string ListMembersType(string variableName)
+        {
+            return String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName");
         }
 
         public abstract string Cast(string variableName, string variableType);

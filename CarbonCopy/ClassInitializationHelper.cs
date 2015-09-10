@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Zinc.CarbonCopy
 {
-    static class ClassDeclarationHelper
+    static class ClassInitializationHelper
     {
         public static List<ObjectDeclaration> GetClassProperties(string variableName)
         {
             var classProperties = new List<ObjectDeclaration>();
 
-            var type = DebuggerHelper.GetValue(ExpressionsHelper.Type(variableName)).Replace("\"", String.Empty).Replace("+", ".");
+            var type = DebuggerHelper.GetValue(ExpressionsHelper.TypeFullName(variableName)).Replace("\"", String.Empty).Replace("+", ".");
 
             ////Need to cast it to specific type when enumeration contains abstract types
             foreach (string propertyName in DebuggerHelper.GetMembersName(ExpressionsHelper.Cast(variableName, type)))

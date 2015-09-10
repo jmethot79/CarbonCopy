@@ -121,24 +121,26 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassDeclarationHelper.cs" />
+    <Compile Include="ClassInitializationHelper.cs" />
     <Compile Include="IVariableDeclaration.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpExpressions.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpListInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpNullInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpObjectDeclarationFactory.cs" />
     <Compile Include="DebuggerHelper.cs" />
     <Compile Include="Expressions.cs" />
     <Compile Include="ExpressionsHelper.cs" />
     <Compile Include="Guids.cs" />
-    <Compile Include="IExpressions.cs" />
     <Compile Include="InvalidExpressionException.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpVariableDeclaration.cs" />
     <Compile Include="LanguageSpecific\Csharp\DatetimeInitialization.cs" />
     <Compile Include="LanguageSpecific\ILanguageSpecificObjectDeclarationFactory.cs" />
     <Compile Include="LanguageSpecific\LanguageSpecificObjectDeclarationFactoryFactory.cs" />
     <Compile Include="LanguageSpecific\VariableDeclarationFactory.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbListInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbNullInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbVariableDeclaration.cs" />
+    <Compile Include="ListInitializationHelper.cs" />
     <Compile Include="PrimitiveDeclaration.cs" />
     <Compile Include="ObjectDeclaration.cs" />
     <Compile Include="ObjectDeclarationFactory.cs" />

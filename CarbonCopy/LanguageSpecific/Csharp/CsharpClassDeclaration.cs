@@ -24,7 +24,7 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
         {
             var stringBuilder = new StringBuilder();
 
-            var classProperties = ClassDeclarationHelper.GetClassProperties(_variableName);
+            var classProperties = ClassInitializationHelper.GetClassProperties(_variableName);
 
             if (classProperties != null)
             {

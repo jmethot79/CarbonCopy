@@ -26,12 +26,13 @@ namespace Zinc.CarbonCopy
                 //    replicate.Members = GetDictionaryMembers(variableName);
                 //    replicate.MembersType = GetDictionaryMembersType(variableName);
                 //}
-                //else if (IsList(variableName))
-                //{
+                else if (IsList(variableName))
+                {
+                    return LanguageSpecificObjectDeclarationFactory.CreateListInitialization(variableName);
                 //    replicate = CreateListReplicate();
                 //    replicate.Members = GetListMembers(variableName);
                 //    replicate.MembersType = Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".");
-                //}
+                }
                 else
                 {
                     return LanguageSpecificObjectDeclarationFactory.CreateClassDeclaration(variableName);
@@ -57,12 +58,18 @@ namespace Zinc.CarbonCopy
 
         private static bool IsString(string variableName)
         {
-            return "\"System.String\"" == DebuggerHelper.GetValue(ExpressionsHelper.Type(variableName));
+            return "\"System.String\"" == DebuggerHelper.GetValue(ExpressionsHelper.TypeFullName(variableName));
+        }
+
+        private static bool IsList(string variableName)
+        {
+            var t = DebuggerHelper.GetValue(ExpressionsHelper.TypeName(variableName));
+            return "\"List`1\"" == DebuggerHelper.GetValue(ExpressionsHelper.TypeName(variableName));
         }
 
         private static bool IsDatetime(string variableName)
         {
-            return DebuggerHelper.GetValue(ExpressionsHelper.Type(variableName)).Contains("DateTime");
+            return DebuggerHelper.GetValue(ExpressionsHelper.TypeFullName(variableName)).Contains("DateTime");
         }
     }
 }
