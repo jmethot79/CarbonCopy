@@ -127,7 +127,7 @@
     <Compile Include="LanguageSpecific\Csharp\CsharpExpressions.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpListInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpNullInitialization.cs" />
-    <Compile Include="LanguageSpecific\Csharp\CsharpObjectDeclarationFactory.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpObjectInitializationInstantiator.cs" />
     <Compile Include="DebuggerHelper.cs" />
     <Compile Include="Expressions.cs" />
     <Compile Include="ExpressionsHelper.cs" />
@@ -135,8 +135,8 @@
     <Compile Include="InvalidExpressionException.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpVariableDeclaration.cs" />
     <Compile Include="LanguageSpecific\Csharp\DatetimeInitialization.cs" />
-    <Compile Include="LanguageSpecific\ILanguageSpecificObjectDeclarationFactory.cs" />
-    <Compile Include="LanguageSpecific\LanguageSpecificObjectDeclarationFactoryFactory.cs" />
+    <Compile Include="LanguageSpecific\ILanguageSpecificObjectInitializationInstantiator.cs" />
+    <Compile Include="LanguageSpecific\LanguageSpecificObjectInitializationInstantiatorFactory.cs" />
     <Compile Include="LanguageSpecific\VariableDeclarationFactory.cs" />
     <Compile Include="LanguageSpecific\Vb\VbArrayInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbListInitialization.cs" />
@@ -172,7 +172,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PkgCmdID.cs" />
     <Compile Include="LanguageSpecific\Vb\VbExpressions.cs" />
-    <Compile Include="LanguageSpecific\Vb\VbObjectDeclarationFactory.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbObjectInitializationInstantiator.cs" />
     <Compile Include="StringInitialization.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -161,7 +161,7 @@ namespace Zinc.CarbonCopy
 
             ExpressionsHelper.LanguageSpecificExpressions = LanguageSpecificExpressionsFactory.CreateExpressions(dteInstance);
 
-            ObjectDeclarationFactory.LanguageSpecificObjectDeclarationFactory = LanguageSpecificObjectDeclarationFactoryFactory.CreateFactory(dteInstance);
+            ObjectDeclarationFactory.LanguageSpecificObjectDeclarationFactory = LanguageSpecificObjectInitializationInstantiatorFactory.CreateFactory(dteInstance);
 
             SetIndentationSize(dteInstance);
         }

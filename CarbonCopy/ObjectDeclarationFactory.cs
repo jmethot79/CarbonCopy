@@ -4,7 +4,7 @@ namespace Zinc.CarbonCopy
 {
     static class ObjectDeclarationFactory
     {
-        public static ILanguageSpecificObjectDeclarationFactory LanguageSpecificObjectDeclarationFactory;
+        public static ILanguageSpecificObjectInitializationInstantiator LanguageSpecificObjectDeclarationFactory;
 
         public static ObjectDeclaration CreateObjectDeclaration(string variableName)
         {
@@ -13,15 +13,15 @@ namespace Zinc.CarbonCopy
             {
                 if (IsString(variableName))
                 {
-                    return LanguageSpecificObjectDeclarationFactory.CreateStringInitialization(variableName);
+                    return LanguageSpecificObjectDeclarationFactory.InstantiateStringInitialization(variableName);
                 }
                 else if (IsList(variableName))
                 {
-                    return LanguageSpecificObjectDeclarationFactory.CreateListInitialization(variableName);
+                    return LanguageSpecificObjectDeclarationFactory.InstantiateListInitialization(variableName);
                 }
                 else if (IsArray(variableName))
                 {
-                    return LanguageSpecificObjectDeclarationFactory.CreateArrayInitialization(variableName);
+                    return LanguageSpecificObjectDeclarationFactory.InstantiateArrayInitialization(variableName);
                 }
                 //else if (IsDictionary(variableName))
                 //{
@@ -31,18 +31,18 @@ namespace Zinc.CarbonCopy
                 //}
                 else
                 {
-                    return LanguageSpecificObjectDeclarationFactory.CreateClassDeclaration(variableName);
+                    return LanguageSpecificObjectDeclarationFactory.InstantiateClassInitialization(variableName);
                 }
             }
             else
             {
                 if (IsDatetime(variableName))
                 {
-                    return LanguageSpecificObjectDeclarationFactory.CreateDatetimeDeclaration(variableName);
+                    return LanguageSpecificObjectDeclarationFactory.InstantiateDateTimeInitialization(variableName);
                 }
                 else
                 {
-                    return LanguageSpecificObjectDeclarationFactory.CreatePrimitiveDeclaration(variableName);
+                    return LanguageSpecificObjectDeclarationFactory.InstantiatePrimitiveInitialization(variableName);
                 }
             }
         }

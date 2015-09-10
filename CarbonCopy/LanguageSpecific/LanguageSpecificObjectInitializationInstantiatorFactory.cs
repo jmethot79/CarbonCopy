@@ -5,9 +5,9 @@ using Zinc.CarbonCopy.LanguageSpecific.Vb;
 
 namespace Zinc.CarbonCopy.LanguageSpecific
 {
-    class LanguageSpecificObjectDeclarationFactoryFactory
+    class LanguageSpecificObjectInitializationInstantiatorFactory
     {
-        public static ILanguageSpecificObjectDeclarationFactory CreateFactory(DTE dteInstance)
+        public static ILanguageSpecificObjectInitializationInstantiator CreateFactory(DTE dteInstance)
         {
             string codeModelLanguageConstant = dteInstance.ActiveDocument.ProjectItem.FileCodeModel.Language;
 
@@ -15,11 +15,11 @@ namespace Zinc.CarbonCopy.LanguageSpecific
             {
                 case EnvDTE.CodeModelLanguageConstants.vsCMLanguageVB:
 
-                    return new VbObjectDeclarationFactory();
+                    return new VbObjectInitializationInstantiator();
 
                 case EnvDTE.CodeModelLanguageConstants.vsCMLanguageCSharp:
 
-                    return new CsharpObjectDeclarationFactory();
+                    return new CsharpObjectInitializationInstantiator();
 
                 default:
                     throw new NotImplementedException(String.Concat("Code language not implemented: ", codeModelLanguageConstant.ToString()));
