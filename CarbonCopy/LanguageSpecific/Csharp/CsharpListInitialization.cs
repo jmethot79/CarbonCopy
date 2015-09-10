@@ -2,7 +2,7 @@
 
 namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
 {
-    class CsharpListInitialization : ObjectDeclaration
+    class CsharpListInitialization : ObjectInitialization
     {
         public CsharpListInitialization(string variableName) : base(variableName) {}
 

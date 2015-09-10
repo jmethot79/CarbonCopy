@@ -2,11 +2,11 @@
 {
     interface ILanguageSpecificObjectInitializationInstantiator
     {
-        ObjectDeclaration InstantiateClassInitialization(string variableName);
-        ObjectDeclaration InstantiatePrimitiveInitialization(string variableName);
-        ObjectDeclaration InstantiateDateTimeInitialization(string variableName);
-        ObjectDeclaration InstantiateStringInitialization(string variableName);
-        ObjectDeclaration InstantiateListInitialization(string variableName);
-        ObjectDeclaration InstantiateArrayInitialization(string variableName);
+        ObjectInitialization InstantiateClassInitialization(string variableName);
+        ObjectInitialization InstantiatePrimitiveInitialization(string variableName);
+        ObjectInitialization InstantiateDateTimeInitialization(string variableName);
+        ObjectInitialization InstantiateStringInitialization(string variableName);
+        ObjectInitialization InstantiateListInitialization(string variableName);
+        ObjectInitialization InstantiateArrayInitialization(string variableName);
     }
 }

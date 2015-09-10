@@ -5,9 +5,9 @@ namespace Zinc.CarbonCopy
 {
     static class ClassInitializationHelper
     {
-        public static List<ObjectDeclaration> GetClassProperties(string variableName)
+        public static List<ObjectInitialization> GetClassProperties(string variableName)
         {
-            var classProperties = new List<ObjectDeclaration>();
+            var classProperties = new List<ObjectInitialization>();
 
             var type = DebuggerHelper.GetValue(ExpressionsHelper.TypeFullName(variableName)).Replace("\"", String.Empty).Replace("+", ".");
 
@@ -16,11 +16,11 @@ namespace Zinc.CarbonCopy
             {
                 if (IsPropertyInitializable(variableName, propertyName))
                 {
-                    var propertyDeclaration = ObjectDeclarationFactory.CreateObjectDeclaration(String.Concat(variableName, ".", propertyName));
+                    var propertyInitialization = ObjectInitializationFactory.CreateObjectInitialization(String.Concat(variableName, ".", propertyName));
 
-                    if (propertyDeclaration != null)
+                    if (propertyInitialization != null)
                     {
-                        classProperties.Add(propertyDeclaration);
+                        classProperties.Add(propertyInitialization);
                     }
                 }
             }

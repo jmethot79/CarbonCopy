@@ -4,32 +4,32 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
 {
     class CsharpObjectInitializationInstantiator : ILanguageSpecificObjectInitializationInstantiator
     {
-        public ObjectDeclaration InstantiateClassInitialization(string variableName)
+        public ObjectInitialization InstantiateClassInitialization(string variableName)
         {
-            return new CsharpClassDeclaration(variableName);
+            return new CsharpClassInitialization(variableName);
         }
 
-        public ObjectDeclaration InstantiatePrimitiveInitialization(string variableName)
+        public ObjectInitialization InstantiatePrimitiveInitialization(string variableName)
         {
-            return new PrimitiveDeclaration(variableName);
+            return new PrimitiveInitialization(variableName);
         }
 
-        public ObjectDeclaration InstantiateDateTimeInitialization(string variableName)
+        public ObjectInitialization InstantiateDateTimeInitialization(string variableName)
         {
             return new DatetimeInitialization(variableName);
         }
 
-        public ObjectDeclaration InstantiateStringInitialization(string variableName)
+        public ObjectInitialization InstantiateStringInitialization(string variableName)
         {
             return new StringInitialization(variableName);
         }
 
-        public ObjectDeclaration InstantiateListInitialization(string variableName)
+        public ObjectInitialization InstantiateListInitialization(string variableName)
         {
             return new CsharpListInitialization(variableName);
         }
 
-        public ObjectDeclaration InstantiateArrayInitialization(string variableName)
+        public ObjectInitialization InstantiateArrayInitialization(string variableName)
         {
             return new CsharpArrayInitialization(variableName);
         }

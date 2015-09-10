@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
 {
-    class CsharpArrayInitialization : ObjectDeclaration
+    class CsharpArrayInitialization : ObjectInitialization
     {
         public CsharpArrayInitialization(string variableName) : base(variableName) { }
 

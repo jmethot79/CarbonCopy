@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
 {
-    class CsharpClassDeclaration : ObjectDeclaration 
+    class CsharpClassInitialization : ObjectInitialization 
     {
-        public CsharpClassDeclaration(string variableName) : base(variableName) { }
+        public CsharpClassInitialization(string variableName) : base(variableName) { }
 
         protected override string GenerateInitialization()
         {
@@ -14,13 +14,12 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
 
             stringBuilder.AppendLine(String.Concat("new ", Type, "()"));
 
-            var propertiesDeclaration = GetPropertiesDeclaration();
-            stringBuilder.Append(propertiesDeclaration);
+            stringBuilder.Append(GetPropertiesInitialization());
 
             return stringBuilder.ToString();
         }
 
-        private string GetPropertiesDeclaration()
+        private string GetPropertiesInitialization()
         {
             var stringBuilder = new StringBuilder();
 

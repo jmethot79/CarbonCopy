@@ -2,7 +2,7 @@
 
 namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
 {
-    class DatetimeInitialization : ObjectDeclaration
+    class DatetimeInitialization : ObjectInitialization
     {
         public DatetimeInitialization(string variableName) : base(variableName) { }
 

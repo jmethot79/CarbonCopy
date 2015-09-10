@@ -1,8 +1,8 @@
 ﻿namespace Zinc.CarbonCopy
 {
-    class PrimitiveDeclaration : ObjectDeclaration
+    class PrimitiveInitialization : ObjectInitialization
     {
-        public PrimitiveDeclaration(string variableName) : base(variableName) { }
+        public PrimitiveInitialization(string variableName) : base(variableName) { }
 
         protected override string GenerateInitialization()
         {

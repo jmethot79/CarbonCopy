@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Zinc.CarbonCopy.LanguageSpecific.Vb
 {
-    class VbClassDeclaration : ObjectDeclaration
+    class VbClassInitialization : ObjectInitialization
     {
-        public VbClassDeclaration(string variableName) : base(variableName) { }
+        public VbClassInitialization(string variableName) : base(variableName) { }
 
         protected override string GenerateInitialization()
         {
@@ -14,14 +14,13 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
 
             stringBuilder.Append(String.Concat("New ", Type, "()"));
 
-            var propertiesDeclaration = GetPropertiesDeclaration();
-            stringBuilder.Append(propertiesDeclaration);
+            stringBuilder.Append(GetPropertiesInitialization());
 
             return stringBuilder.ToString();
         }
 
 
-        private string GetPropertiesDeclaration()
+        private string GetPropertiesInitialization()
         {
             var stringBuilder = new StringBuilder();
 

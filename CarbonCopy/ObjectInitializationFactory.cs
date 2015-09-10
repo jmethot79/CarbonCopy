@@ -2,26 +2,22 @@
 
 namespace Zinc.CarbonCopy
 {
-    static class ObjectDeclarationFactory
+    static class ObjectInitializationFactory
     {
-        public static ILanguageSpecificObjectInitializationInstantiator LanguageSpecificObjectDeclarationFactory;
+        public static ILanguageSpecificObjectInitializationInstantiator Instantiator;
 
-        public static ObjectDeclaration CreateObjectDeclaration(string variableName)
+        public static ObjectInitialization CreateObjectInitialization(string variableName)
         {
             //TODO: evaluer toutes les expressions en 1 seul call au debugger
             if (IsClass(variableName))
             {
                 if (IsString(variableName))
                 {
-                    return LanguageSpecificObjectDeclarationFactory.InstantiateStringInitialization(variableName);
+                    return Instantiator.InstantiateStringInitialization(variableName);
                 }
                 else if (IsList(variableName))
                 {
-                    return LanguageSpecificObjectDeclarationFactory.InstantiateListInitialization(variableName);
-                }
-                else if (IsArray(variableName))
-                {
-                    return LanguageSpecificObjectDeclarationFactory.InstantiateArrayInitialization(variableName);
+                    return Instantiator.InstantiateListInitialization(variableName);
                 }
                 //else if (IsDictionary(variableName))
                 //{
@@ -29,20 +25,24 @@ namespace Zinc.CarbonCopy
                 //    replicate.Members = GetDictionaryMembers(variableName);
                 //    replicate.MembersType = GetDictionaryMembersType(variableName);
                 //}
+                else if (IsArray(variableName))
+                {
+                    return Instantiator.InstantiateArrayInitialization(variableName);
+                }
                 else
                 {
-                    return LanguageSpecificObjectDeclarationFactory.InstantiateClassInitialization(variableName);
+                    return Instantiator.InstantiateClassInitialization(variableName);
                 }
             }
             else
             {
                 if (IsDatetime(variableName))
                 {
-                    return LanguageSpecificObjectDeclarationFactory.InstantiateDateTimeInitialization(variableName);
+                    return Instantiator.InstantiateDateTimeInitialization(variableName);
                 }
                 else
                 {
-                    return LanguageSpecificObjectDeclarationFactory.InstantiatePrimitiveInitialization(variableName);
+                    return Instantiator.InstantiatePrimitiveInitialization(variableName);
                 }
             }
         }

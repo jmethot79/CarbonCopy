@@ -1,6 +1,6 @@
 ﻿namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
 {
-    class CsharpNullInitialization : ObjectDeclaration
+    class CsharpNullInitialization : ObjectInitialization
     {
         CsharpNullInitialization() : base(null) { }
 

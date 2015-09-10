@@ -2,7 +2,7 @@
 
 namespace Zinc.CarbonCopy.LanguageSpecific.Vb
 {
-    class VbListInitialization : ObjectDeclaration
+    class VbListInitialization : ObjectInitialization
     {
         public VbListInitialization(string variableName) : base(variableName) { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Zinc.CarbonCopy
 {
-    class StringInitialization : ObjectDeclaration
+    class StringInitialization : ObjectInitialization
     {
         public StringInitialization(string variableName) : base(variableName) { }
 

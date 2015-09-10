@@ -4,7 +4,7 @@
     {
         public string GetDeclaration(string variableName)
         {
-            var objectInitialization = ObjectDeclarationFactory.CreateObjectDeclaration(variableName);
+            var objectInitialization = ObjectInitializationFactory.CreateObjectInitialization(variableName);
 
             return string.Concat("Dim ", variableName, " = ", objectInitialization.Initialization);
         }

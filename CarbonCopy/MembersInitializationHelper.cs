@@ -17,7 +17,7 @@ namespace Zinc.CarbonCopy
                     membersStringBuilder.AppendLine(",");
                 }
 
-                var memberInitialization = ObjectDeclarationFactory.CreateObjectDeclaration(ExpressionsHelper.Item(variableName, i));
+                var memberInitialization = ObjectInitializationFactory.CreateObjectInitialization(ExpressionsHelper.Item(variableName, i));
 
                 membersStringBuilder.Append(string.Concat(Indentation.ToString(), memberInitialization.Initialization));
             }

@@ -1,6 +1,6 @@
 ﻿namespace Zinc.CarbonCopy.LanguageSpecific.Vb
 {
-    class VbNullInitialization : ObjectDeclaration
+    class VbNullInitialization : ObjectInitialization
     {
         VbNullInitialization() : base(null) { }
 

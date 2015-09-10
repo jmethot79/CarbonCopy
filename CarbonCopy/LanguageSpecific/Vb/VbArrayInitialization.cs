@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Zinc.CarbonCopy.LanguageSpecific.Vb
 {
-    class VbArrayInitialization : ObjectDeclaration
+    class VbArrayInitialization : ObjectInitialization
     {
         public VbArrayInitialization(string variableName) : base(variableName) { }
 
