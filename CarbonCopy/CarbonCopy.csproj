@@ -123,6 +123,7 @@
   <ItemGroup>
     <Compile Include="ClassInitializationHelper.cs" />
     <Compile Include="IVariableDeclaration.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpArrayInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpExpressions.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpListInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpNullInitialization.cs" />
@@ -137,7 +138,9 @@
     <Compile Include="LanguageSpecific\ILanguageSpecificObjectDeclarationFactory.cs" />
     <Compile Include="LanguageSpecific\LanguageSpecificObjectDeclarationFactoryFactory.cs" />
     <Compile Include="LanguageSpecific\VariableDeclarationFactory.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbArrayInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbListInitialization.cs" />
+    <Compile Include="MembersInitializationHelper.cs" />
     <Compile Include="LanguageSpecific\Vb\VbNullInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbVariableDeclaration.cs" />
     <Compile Include="ListInitializationHelper.cs" />

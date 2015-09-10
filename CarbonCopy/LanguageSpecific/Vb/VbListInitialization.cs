@@ -20,25 +20,9 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
             {
                 stringBuilder.AppendLine(" From {");
 
-                Indentation.Level++;
+                var membersInitialization = MembersInitializationHelper.GetMembersInitialization(_variableName, membersCount);
 
-                var membersStringBuilder = new StringBuilder();
-
-                for (int i = 0; i < membersCount; i++)
-                {
-                    if (membersStringBuilder.Length > 0)
-                    {
-                        membersStringBuilder.AppendLine(",");
-                    }
-                    
-                    var memberInitialization = ObjectDeclarationFactory.CreateObjectDeclaration(string.Concat(_variableName, "(", i.ToString(), ")"));
-
-                    membersStringBuilder.Append(string.Concat(Indentation.ToString(), memberInitialization.Initialization));
-                }
-
-                Indentation.Level--;
-
-                stringBuilder.Append(membersStringBuilder.ToString());
+                stringBuilder.Append(membersInitialization);
                 stringBuilder.Append("}");
             }
 

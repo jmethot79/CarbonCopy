@@ -7,5 +7,6 @@
         ObjectDeclaration CreateDatetimeDeclaration(string variableName);
         ObjectDeclaration CreateStringInitialization(string variableName);
         ObjectDeclaration CreateListInitialization(string variableName);
+        ObjectDeclaration CreateArrayInitialization(string variableName);
     }
 }

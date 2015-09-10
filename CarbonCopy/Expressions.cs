@@ -14,6 +14,11 @@ namespace Zinc.CarbonCopy
             return String.Concat(variableName, ".GetType().Name");
         }
 
+        public string BaseTypeName(string variableName)
+        {
+            return String.Concat(variableName, ".GetType().BaseType.Name");
+        }
+
         public string ItemsCount(string variableName)
         {
             return String.Concat(variableName, ".Count()");
@@ -34,5 +39,7 @@ namespace Zinc.CarbonCopy
         public abstract string IsInitOnly(string variableName, string propertyName);
 
         public abstract string CanWrite(string variableName, string propertyName);
+
+        public abstract string Item(string variableName, int itemIndex);
     }
 }

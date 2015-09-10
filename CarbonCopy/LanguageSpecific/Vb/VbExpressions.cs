@@ -18,5 +18,10 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
         {
             return String.Concat(variableName, ".GetType().GetProperty(\"", propertyName, "\", System.Reflection.BindingFlags.Public Or System.Reflection.BindingFlags.Instance).CanWrite");
         }
+
+        public override string Item(string variableName, int itemIndex)
+        {
+            return String.Concat(variableName, "(", itemIndex.ToString(), ")");
+        }
     }
 }

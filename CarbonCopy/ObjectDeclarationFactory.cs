@@ -15,24 +15,20 @@ namespace Zinc.CarbonCopy
                 {
                     return LanguageSpecificObjectDeclarationFactory.CreateStringInitialization(variableName);
                 }
-                //else if (IsArray(variableName))
-                //{
-                //    replicate = CreateArrayReplicate();
-                    
-                //}
+                else if (IsList(variableName))
+                {
+                    return LanguageSpecificObjectDeclarationFactory.CreateListInitialization(variableName);
+                }
+                else if (IsArray(variableName))
+                {
+                    return LanguageSpecificObjectDeclarationFactory.CreateArrayInitialization(variableName);
+                }
                 //else if (IsDictionary(variableName))
                 //{
                 //    replicate = CreateDictionaryReplicate();
                 //    replicate.Members = GetDictionaryMembers(variableName);
                 //    replicate.MembersType = GetDictionaryMembersType(variableName);
                 //}
-                else if (IsList(variableName))
-                {
-                    return LanguageSpecificObjectDeclarationFactory.CreateListInitialization(variableName);
-                //    replicate = CreateListReplicate();
-                //    replicate.Members = GetListMembers(variableName);
-                //    replicate.MembersType = Debugger.GetExpression(String.Concat(variableName, ".GetType().GenericTypeArguments.First().FullName")).Value.Replace("\"", String.Empty).Replace("+", ".");
-                }
                 else
                 {
                     return LanguageSpecificObjectDeclarationFactory.CreateClassDeclaration(variableName);
@@ -63,12 +59,17 @@ namespace Zinc.CarbonCopy
 
         private static bool IsList(string variableName)
         {
-            var t = DebuggerHelper.GetValue(ExpressionsHelper.TypeName(variableName));
             return "\"List`1\"" == DebuggerHelper.GetValue(ExpressionsHelper.TypeName(variableName));
+        }
+
+        private static bool IsArray(string variableName)
+        {
+            return "\"Array\"" == DebuggerHelper.GetValue(ExpressionsHelper.BaseTypeName(variableName));
         }
 
         private static bool IsDatetime(string variableName)
         {
+            //pourrait être plus précis
             return DebuggerHelper.GetValue(ExpressionsHelper.TypeFullName(variableName)).Contains("DateTime");
         }
     }

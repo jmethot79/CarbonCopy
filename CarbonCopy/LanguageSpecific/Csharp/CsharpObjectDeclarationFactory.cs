@@ -28,5 +28,10 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
         {
             return new CsharpListInitialization(variableName);
         }
+
+        public ObjectDeclaration CreateArrayInitialization(string variableName)
+        {
+            return new CsharpArrayInitialization(variableName);
+        }
     }
 }
