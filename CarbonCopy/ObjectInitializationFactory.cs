@@ -19,12 +19,10 @@ namespace Zinc.CarbonCopy
                 {
                     return Instantiator.InstantiateListInitialization(variableName);
                 }
-                //else if (IsDictionary(variableName))
-                //{
-                //    replicate = CreateDictionaryReplicate();
-                //    replicate.Members = GetDictionaryMembers(variableName);
-                //    replicate.MembersType = GetDictionaryMembersType(variableName);
-                //}
+                else if (IsDictionary(variableName))
+                {
+                    return Instantiator.InstantiateDictionaryInitialization(variableName);
+                }
                 else if (IsArray(variableName))
                 {
                     return Instantiator.InstantiateArrayInitialization(variableName);
@@ -71,6 +69,11 @@ namespace Zinc.CarbonCopy
         {
             //pourrait être plus précis
             return DebuggerHelper.GetValue(ExpressionsHelper.TypeFullName(variableName)).Contains("DateTime");
+        }
+
+        private static bool IsDictionary(string variableName)
+        {
+            return "\"Dictionary`2\"" == DebuggerHelper.GetValue(ExpressionsHelper.TypeName(variableName));
         }
     }
 }

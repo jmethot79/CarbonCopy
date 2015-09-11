@@ -41,5 +41,9 @@ namespace Zinc.CarbonCopy
         public abstract string CanWrite(string variableName, string propertyName);
 
         public abstract string Item(string variableName, int itemIndex);
+
+        public abstract string DictionaryKeyType(string variableName);
+
+        public abstract string DictionaryValueType(string variableName);
     }
 }

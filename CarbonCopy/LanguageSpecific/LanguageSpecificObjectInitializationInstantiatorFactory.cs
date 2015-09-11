@@ -7,7 +7,7 @@ namespace Zinc.CarbonCopy.LanguageSpecific
 {
     class LanguageSpecificObjectInitializationInstantiatorFactory
     {
-        public static ILanguageSpecificObjectInitializationInstantiator CreateFactory(DTE dteInstance)
+        public static ILanguageSpecificObjectInitializationInstantiator CreateInstantiator(DTE dteInstance)
         {
             string codeModelLanguageConstant = dteInstance.ActiveDocument.ProjectItem.FileCodeModel.Language;
 

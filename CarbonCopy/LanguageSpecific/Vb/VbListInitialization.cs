@@ -14,7 +14,7 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
 
             var membersCount = int.Parse(DebuggerHelper.GetValue(ExpressionsHelper.ItemsCount(_variableName)));
 
-            stringBuilder.Append(string.Concat("New List(Of ", membersType, ")"));
+            stringBuilder.Append(string.Concat("New System.Collections.Generic.List(Of ", membersType, ")"));
 
             if (membersCount > 0)
             {

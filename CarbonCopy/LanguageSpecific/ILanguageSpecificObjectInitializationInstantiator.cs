@@ -8,5 +8,6 @@
         ObjectInitialization InstantiateStringInitialization(string variableName);
         ObjectInitialization InstantiateListInitialization(string variableName);
         ObjectInitialization InstantiateArrayInitialization(string variableName);
+        ObjectInitialization InstantiateDictionaryInitialization(string variableName);
     }
 }

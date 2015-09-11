@@ -122,8 +122,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassInitializationHelper.cs" />
+    <Compile Include="DictionaryMembersInitializationHelper.cs" />
     <Compile Include="IVariableDeclaration.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpArrayInitialization.cs" />
+    <Compile Include="LanguageSpecific\Csharp\CsharpDictionaryInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpExpressions.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpListInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpNullInitialization.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="LanguageSpecific\LanguageSpecificObjectInitializationInstantiatorFactory.cs" />
     <Compile Include="LanguageSpecific\VariableDeclarationFactory.cs" />
     <Compile Include="LanguageSpecific\Vb\VbArrayInitialization.cs" />
+    <Compile Include="LanguageSpecific\Vb\VbDictionaryInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbListInitialization.cs" />
     <Compile Include="MembersInitializationHelper.cs" />
     <Compile Include="LanguageSpecific\Vb\VbNullInitialization.cs" />

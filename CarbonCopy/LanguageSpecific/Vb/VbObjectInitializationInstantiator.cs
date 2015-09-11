@@ -33,5 +33,10 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
         {
             return new VbArrayInitialization(variableName);
         }
+
+        public ObjectInitialization InstantiateDictionaryInitialization(string variableName)
+        {
+            return new VbDictionaryInitialization(variableName);
+        }
     }
 }

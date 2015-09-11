@@ -32,6 +32,14 @@ namespace Zinc.CarbonCopy
             }
         }
 
+        public string VariableName
+        {
+            set
+            {
+                _variableName = value;
+            }
+        }
+
         abstract protected string GenerateInitialization();
     }
 }

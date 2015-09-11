@@ -14,7 +14,7 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Csharp
 
             var membersCount = int.Parse(DebuggerHelper.GetValue(ExpressionsHelper.ItemsCount(_variableName)));
 
-            stringBuilder.AppendLine(string.Concat("new List<", membersType, ">()"));
+            stringBuilder.AppendLine(string.Concat("new System.Collections.Generic.List<", membersType, ">()"));
 
             if (membersCount > 0)
             {

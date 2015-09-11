@@ -23,5 +23,15 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
         {
             return String.Concat(variableName, "(", itemIndex.ToString(), ")");
         }
+
+        public override string DictionaryKeyType(string variableName)
+        {
+            return String.Concat(variableName, ".GetType().GenericTypeArguments(0).FullName");
+        }
+
+        public override string DictionaryValueType(string variableName)
+        {
+            return String.Concat(variableName, ".GetType().GenericTypeArguments(1).FullName");
+        }
     }
 }
