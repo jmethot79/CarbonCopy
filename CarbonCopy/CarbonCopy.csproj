@@ -153,15 +153,10 @@
     <Compile Include="LanguageSpecific\Csharp\CsharpClassInitialization.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LanguageSpecific\IReplicateProvider.cs" />
-    <Compile Include="LanguageSpecific\IReplicator.cs" />
     <Compile Include="Indentation.cs" />
     <Compile Include="LanguageSpecific\LanguageSpecificExpressionsFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LanguageSpecific\SimpleReplicate.cs" />
-    <Compile Include="LanguageSpecific\StringReplicate.cs" />
-    <Compile Include="LanguageSpecific\Replicate.cs" />
     <Compile Include="LanguageSpecific\Vb\VbClassInitialization.cs">
       <SubType>Code</SubType>
     </Compile>

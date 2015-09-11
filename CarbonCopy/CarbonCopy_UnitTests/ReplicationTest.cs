@@ -1,6 +1,6 @@
 ﻿ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Zinc.CarbonCopy.Replication;
+
 
 namespace CarbonCopy_UnitTests
 {

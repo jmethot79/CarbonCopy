@@ -10,7 +10,6 @@ using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using EnvDTE;
 using System.Windows.Forms;
-using Zinc.CarbonCopy.Replication;
 using Zinc.CarbonCopy.LanguageSpecific;
 
 namespace Zinc.CarbonCopy
