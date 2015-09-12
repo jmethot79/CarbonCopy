@@ -13,7 +13,9 @@ namespace Zinc.CarbonCopy.LanguageSpecific.Vb
 
             var membersCount = int.Parse(DebuggerHelper.GetValue(ExpressionsHelper.ItemsCount(_variableName)));
 
-            stringBuilder.AppendLine(String.Concat(Indentation.ToString(), "{"));
+            var type = DebuggerHelper.GetValue(ExpressionsHelper.TypeFullName(_variableName)).Replace("\"", String.Empty).Replace("+", ".").Replace("[]","()");
+
+            stringBuilder.AppendLine(String.Concat(Indentation.ToString(), "New ", type, " {"));
 
             var membersInitialization = MembersInitializationHelper.GetMembersInitialization(_variableName, membersCount);
 
