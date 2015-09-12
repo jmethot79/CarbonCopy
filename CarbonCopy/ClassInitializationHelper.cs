@@ -30,7 +30,6 @@ namespace Zinc.CarbonCopy
 
         public static bool IsPropertyInitializable(string variableName, string propertyName)
         {
-            //TODO: faire interpreter les 2 en 1 seul call au debugger
             return IsPropertyWritable(variableName, propertyName) ||
                 IsFieldPublic(variableName, propertyName);
         }

@@ -1,4 +1,5 @@
-﻿using Zinc.CarbonCopy.LanguageSpecific;
+﻿using System.Collections.Generic;
+using Zinc.CarbonCopy.LanguageSpecific;
 
 namespace Zinc.CarbonCopy
 {
@@ -8,7 +9,6 @@ namespace Zinc.CarbonCopy
 
         public static ObjectInitialization CreateObjectInitialization(string variableName)
         {
-            //TODO: evaluer toutes les expressions en 1 seul call au debugger
             if (IsClass(variableName))
             {
                 if (IsString(variableName))

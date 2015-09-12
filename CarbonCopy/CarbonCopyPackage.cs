@@ -118,7 +118,7 @@ namespace Zinc.CarbonCopy
             catch (InvalidExpressionException)
             {
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show("Make sure the object name is fully selected.", "Invalid object selected");
+                MessageBox.Show("Make sure the variable is fully selected.", "Invalid variable selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -147,9 +147,17 @@ namespace Zinc.CarbonCopy
 
             SetDefaultSettings(dteInstance);
 
+            //var stopWatch = new Stopwatch();
+            //stopWatch.Start();
+
             var variableDeclaration = VariableDeclarationFactory.CreateVariableDeclaration(dteInstance);
 
-            return variableDeclaration.GetDeclaration(variableName);
+            var declaration = variableDeclaration.GetDeclaration(variableName);
+
+            //stopWatch.Stop();
+            //Debug.WriteLine(string.Concat("StopWatch: ", stopWatch.ElapsedMilliseconds.ToString()));
+
+            return declaration;
         }
 
         private void SetDefaultSettings(DTE dteInstance)
