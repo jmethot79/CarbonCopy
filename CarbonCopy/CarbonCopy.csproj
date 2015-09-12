@@ -128,7 +128,6 @@
     <Compile Include="LanguageSpecific\Csharp\CsharpDictionaryInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpExpressions.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpListInitialization.cs" />
-    <Compile Include="LanguageSpecific\Csharp\CsharpNullInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpObjectInitializationInstantiator.cs" />
     <Compile Include="DebuggerHelper.cs" />
     <Compile Include="Expressions.cs" />
@@ -144,7 +143,6 @@
     <Compile Include="LanguageSpecific\Vb\VbDictionaryInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbListInitialization.cs" />
     <Compile Include="MembersInitializationHelper.cs" />
-    <Compile Include="LanguageSpecific\Vb\VbNullInitialization.cs" />
     <Compile Include="LanguageSpecific\Vb\VbVariableDeclaration.cs" />
     <Compile Include="ListInitializationHelper.cs" />
     <Compile Include="PrimitiveInitialization.cs" />
