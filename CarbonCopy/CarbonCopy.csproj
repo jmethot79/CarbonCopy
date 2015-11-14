@@ -124,6 +124,7 @@
     <Compile Include="ClassInitializationHelper.cs" />
     <Compile Include="DictionaryMembersInitializationHelper.cs" />
     <Compile Include="IVariableDeclaration.cs" />
+    <Compile Include="LanguageSpecific\CodeModelLanguageHelper.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpArrayInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpDictionaryInitialization.cs" />
     <Compile Include="LanguageSpecific\Csharp\CsharpExpressions.cs" />

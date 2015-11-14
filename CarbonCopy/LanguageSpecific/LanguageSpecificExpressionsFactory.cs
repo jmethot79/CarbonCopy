@@ -7,7 +7,7 @@ namespace Zinc.CarbonCopy.LanguageSpecific
     {
         public static Expressions CreateExpressions(DTE dteInstance)
         {
-            string codeModelLanguageConstant = dteInstance.ActiveDocument.ProjectItem.FileCodeModel.Language;
+            string codeModelLanguageConstant = CodeModelLanguageHelper.GetCodeModelLanguageConstant(dteInstance);
 
             switch (codeModelLanguageConstant)
             {

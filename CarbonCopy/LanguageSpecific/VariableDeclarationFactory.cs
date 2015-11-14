@@ -7,7 +7,7 @@ namespace Zinc.CarbonCopy.LanguageSpecific
     {
         public static IVariableDeclaration CreateVariableDeclaration(DTE dteInstance)
         {
-            string codeModelLanguageConstant = dteInstance.ActiveDocument.ProjectItem.FileCodeModel.Language;
+            string codeModelLanguageConstant = CodeModelLanguageHelper.GetCodeModelLanguageConstant(dteInstance);
 
             switch (codeModelLanguageConstant)
             {

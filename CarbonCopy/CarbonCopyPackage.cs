@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Shell;
 using EnvDTE;
 using System.Windows.Forms;
 using Zinc.CarbonCopy.LanguageSpecific;
+using System.Text;
 
 namespace Zinc.CarbonCopy
 {
@@ -29,7 +30,7 @@ namespace Zinc.CarbonCopy
     [PackageRegistration(UseManagedResourcesOnly = true)]
     // This attribute is used to register the information needed to show this package
     // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", "1.2", IconResourceID = 400)]
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidCarbonCopyPkgString)]
@@ -104,7 +105,29 @@ namespace Zinc.CarbonCopy
             catch (Exception ex)
             {
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show(String.Concat(ex.Message, ex.StackTrace));
+                MessageBox.Show(String.Concat(ex.Message, ex.StackTrace), "CarbonCopy");
+
+#if DEBUG
+                DumpKnownValues();               
+#endif
+            }
+        }
+
+        private void DumpKnownValues()
+        {
+            var answer = MessageBox.Show("Dump debugger expressions?", "CarbonCopy", MessageBoxButtons.YesNo);
+
+            if (answer == DialogResult.Yes)
+            {
+                var dump = new StringBuilder();
+
+                foreach (string key in DebuggerHelper.KnownValues.Keys)
+                {
+                    dump.AppendLine(string.Concat(key, DebuggerHelper.KnownValues[key]));
+                }
+                var dumpFilename = System.IO.Path.GetTempFileName();
+                System.IO.File.WriteAllText(dumpFilename, dump.ToString());
+                System.Diagnostics.Process.Start(dumpFilename);
             }
         }
 
