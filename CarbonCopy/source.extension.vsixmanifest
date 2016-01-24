@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Id="ccfde61d-76fe-4ca0-b813-fbe6a383ebf5" Version="1.3" Language="en-US" Publisher="Zinc" />
     <DisplayName>CarbonCopy</DisplayName>
-    <Description xml:space="preserve">This tool generates the declaration and initialization of an object selected while debugging.</Description>
+    <Description xml:space="preserve">An extension for C# and VB.NET developers that generates the declaration and initialization of an object selected while debugging.</Description>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0]" />
